@@ -24,12 +24,16 @@ class Main(QtWidgets.QMainWindow):
         var.ui = Ui_window()
         var.ui.setupUi(self)
 
-
+#Eventos de botón
         var.ui.btnSalir.clicked.connect(eventos.Eventos.Salir)
-
+        var.ui.rbtGroupSex.buttonClicked.connect(clientes.Clientes.SelSexo)
+        var.ui.chkGroupPago.buttonClicked.connect(clientes.Clientes.selPago)
+#Eventos de la barra de menús
         var.ui.actionSalir.triggered.connect(eventos.Eventos.Salir)
-
+#Eventos de texto
         var.ui.txtDNI.editingFinished.connect(clientes.Clientes.validarDNI)
+
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
