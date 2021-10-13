@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>811</width>
+    <height>527</height>
    </rect>
   </property>
   <property name="font">
@@ -36,7 +36,7 @@
     </property>
     <property name="font">
      <font>
-      <family>12 Calibri</family>
+      <family>13 Calibri</family>
       <pointsize>14</pointsize>
       <weight>9</weight>
       <italic>false</italic>
@@ -61,10 +61,18 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>340</y>
+      <y>380</y>
       <width>75</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="text">
      <string>Aceptar</string>
@@ -74,10 +82,16 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>340</y>
+      <y>380</y>
       <width>75</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Salir</string>
@@ -86,11 +100,17 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>310</y>
+      <x>40</x>
+      <y>350</y>
       <width>651</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -100,9 +120,407 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
     <property name="geometry">
      <rect>
       <x>40</x>
-      <y>106</y>
-      <width>261</width>
-      <height>21</height>
+      <y>140</y>
+      <width>631</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="lblApel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Apellidos:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtApel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+         <horstretch>105</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>201</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>35</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="lblApel_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Nombre:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtNome">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>270</y>
+      <width>181</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QRadioButton" name="rbtFem">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Mujer</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">rbtGroupSex</string>
+       </attribute>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rbtHom">
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Hombre</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">rbtGroupSex</string>
+       </attribute>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>310</y>
+      <width>611</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="lblPago">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Formas de pago:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chkEfectivo">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Efectivo</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">chkGroupPago</string>
+       </attribute>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chkTarjeta">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Tarjeta</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">chkGroupPago</string>
+       </attribute>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chkCargocuenta">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Cargo en cuenta</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">chkGroupPago</string>
+       </attribute>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>25</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="chkTransferencia">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Transferencia</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">chkGroupPago</string>
+       </attribute>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>42</x>
+      <y>182</y>
+      <width>631</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="lblDir">
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Dirección:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtDir">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>210</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>41</x>
+      <y>230</y>
+      <width>381</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_6">
+     <item>
+      <widget class="QLabel" name="lblPro">
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Provincia:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cmbProv">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>50</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QLabel" name="lblMunicipio">
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Municipio:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboBox"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>100</y>
+      <width>594</width>
+      <height>37</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
@@ -114,10 +532,32 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
        <property name="text">
         <string>DNI:</string>
        </property>
       </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>24</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
      </item>
      <item>
       <widget class="QLineEdit" name="txtDNI">
@@ -142,220 +582,65 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
        </property>
       </widget>
      </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>140</y>
-      <width>631</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLabel" name="lblApel">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+      <spacer name="horizontalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
-       <property name="text">
-        <string>Apellidos:</string>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="txtApel">
-       <property name="maximumSize">
+       <property name="sizeHint" stdset="0">
         <size>
-         <width>201</width>
-         <height>16777215</height>
+         <width>33</width>
+         <height>20</height>
         </size>
        </property>
-      </widget>
+      </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="lblApel_2">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+      <widget class="QLabel" name="lblFchAlta">
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="text">
-        <string>Nombre:</string>
+        <string>Fecha alta:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="txtNome"/>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>230</y>
-      <width>181</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QRadioButton" name="rbtFem">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Mujer</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">rbtGroupSex</string>
-       </attribute>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="rbtHom">
-       <property name="text">
-        <string>Hombre</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">rbtGroupSex</string>
-       </attribute>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>41</x>
-      <y>271</y>
-      <width>679</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_5">
-     <item>
-      <widget class="QLabel" name="lblPago">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Formas de pago:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="chkEfectivo">
+      <widget class="QLineEdit" name="txtFchAlta">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
-       <property name="text">
-        <string>Efectivo</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">chkGroupPago</string>
-       </attribute>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="chkTarjeta">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+      <widget class="QPushButton" name="btnFchAlta">
+       <property name="font">
+        <font>
+         <family>Calibri</family>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="text">
-        <string>Tarjeta</string>
+        <string/>
        </property>
-       <attribute name="buttonGroup">
-        <string notr="true">chkGroupPago</string>
-       </attribute>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="chkCargocuenta">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+       <property name="icon">
+        <iconset>
+         <normaloff>img/calendar.png</normaloff>img/calendar.png</iconset>
        </property>
-       <property name="text">
-        <string>Cargo en cuenta</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">chkGroupPago</string>
-       </attribute>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="chkTransferencia">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>Transferencia</string>
-       </property>
-       <attribute name="buttonGroup">
-        <string notr="true">chkGroupPago</string>
-       </attribute>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>42</x>
-      <y>181</y>
-      <width>498</width>
-      <height>27</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QLabel" name="lblDir">
-       <property name="text">
-        <string>Dirección:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="txtDir"/>
-     </item>
-     <item>
-      <widget class="QLabel" name="lblPro">
-       <property name="text">
-        <string>Provincia:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="cmbPro">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+       <property name="iconSize">
+        <size>
+         <width>27</width>
+         <height>27</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -367,7 +652,7 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>811</width>
      <height>21</height>
     </rect>
    </property>

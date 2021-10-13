@@ -32,6 +32,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionSalir.triggered.connect(eventos.Eventos.Salir)
 #Eventos de texto
         var.ui.txtDNI.editingFinished.connect(clientes.Clientes.validarDNI)
+#Eventos de comboBox
+        clientes.Clientes.cargaProv_(self)
+        var.ui.cmbProv.activated[str].connect(clientes.Clientes.selProv)
 
 
 

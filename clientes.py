@@ -56,3 +56,19 @@ class Clientes():
                 print('Has seleccionado cargo cuenta')
         except Exception as error:
             print('Error en módulo seleccionar forma de pago', error)
+
+    def cargaProv_(self):
+        try:
+            var.ui.cmbProv.clear()
+            prov = ['','A Coruña','Lugo','Ourense','Pontevedra','Vigo']
+            for i in prov:
+                var.ui.cmbProv.addItem(i)
+        except Exception as error:
+            print('Error en módulo cargar provincias', error)
+
+    def selProv(prov):
+        try:
+            print('Has seleccionado la provincia de ', prov)
+            return prov
+        except Exception as error:
+            print('Error en la seleccion de provincia', error)
