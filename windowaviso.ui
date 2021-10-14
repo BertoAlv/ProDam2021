@@ -61,10 +61,10 @@
   <widget class="QLabel" name="lblmageAviso">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>20</y>
-     <width>91</width>
-     <height>71</height>
+     <x>110</x>
+     <y>10</y>
+     <width>111</width>
+     <height>91</height>
     </rect>
    </property>
    <property name="text">
@@ -74,7 +74,7 @@
     <enum>Qt::PlainText</enum>
    </property>
    <property name="pixmap">
-    <pixmap>img/símbolo-de-advertencia-peligro.jpg</pixmap>
+    <pixmap resource="img/warning.qrc">:/warningprefix/símbolo-de-advertencia-peligro.jpg</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -87,7 +87,9 @@
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="img/warning.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>btnBoxAviso</sender>

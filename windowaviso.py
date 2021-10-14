@@ -32,19 +32,22 @@ class Ui_windowaviso(object):
         self.lblAviso.setAlignment(QtCore.Qt.AlignCenter)
         self.lblAviso.setObjectName("lblAviso")
         self.lblmageAviso = QtWidgets.QLabel(windowaviso)
-        self.lblmageAviso.setGeometry(QtCore.QRect(120, 20, 91, 71))
+        self.lblmageAviso.setGeometry(QtCore.QRect(110, 10, 111, 91))
         self.lblmageAviso.setText("")
         self.lblmageAviso.setTextFormat(QtCore.Qt.PlainText)
-        self.lblmageAviso.setPixmap(QtGui.QPixmap("img/símbolo-de-advertencia-peligro.jpg"))
+        self.lblmageAviso.setPixmap(QtGui.QPixmap(":/warningprefix/símbolo-de-advertencia-peligro.jpg"))
         self.lblmageAviso.setScaledContents(True)
         self.lblmageAviso.setAlignment(QtCore.Qt.AlignCenter)
         self.lblmageAviso.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse)
         self.lblmageAviso.setObjectName("lblmageAviso")
 
         self.retranslateUi(windowaviso)
+        self.btnBoxAviso.accepted.connect(windowaviso.accept)
+        self.btnBoxAviso.rejected.connect(windowaviso.reject)
         QtCore.QMetaObject.connectSlotsByName(windowaviso)
 
     def retranslateUi(self, windowaviso):
         _translate = QtCore.QCoreApplication.translate
         windowaviso.setWindowTitle(_translate("windowaviso", "Dialog"))
         self.lblAviso.setText(_translate("windowaviso", "Desea salir?"))
+import warning_rc
