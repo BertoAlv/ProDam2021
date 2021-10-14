@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="warningprefix">
+    <file>símbolo-de-advertencia-peligro.jpg</file>
+  </qresource>
+</RCC>
