@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>811</width>
-    <height>527</height>
+    <width>1077</width>
+    <height>821</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="font">
    <font>
@@ -28,8 +34,8 @@
    <widget class="QLabel" name="lblClientes">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>30</y>
+      <x>470</x>
+      <y>10</y>
       <width>191</width>
       <height>20</height>
      </rect>
@@ -57,11 +63,11 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
      <string>XESTIÓN CLIENTES</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnAceptar">
+   <widget class="QPushButton" name="btnGrabaCli">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>380</y>
+      <x>460</x>
+      <y>360</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -75,14 +81,14 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
      </font>
     </property>
     <property name="text">
-     <string>Aceptar</string>
+     <string>Grabar</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnSalir">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>380</y>
+      <x>560</x>
+      <y>360</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -100,8 +106,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
    <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>350</y>
+      <x>210</x>
+      <y>330</y>
       <width>651</width>
       <height>20</height>
      </rect>
@@ -119,8 +125,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>140</y>
+      <x>210</x>
+      <y>120</y>
       <width>631</width>
       <height>27</height>
      </rect>
@@ -213,8 +219,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>270</y>
+      <x>210</x>
+      <y>250</y>
       <width>181</width>
       <height>25</height>
      </rect>
@@ -263,8 +269,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>310</y>
+      <x>210</x>
+      <y>290</y>
       <width>611</width>
       <height>25</height>
      </rect>
@@ -404,8 +410,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>42</x>
-      <y>182</y>
+      <x>212</x>
+      <y>162</y>
       <width>631</width>
       <height>27</height>
      </rect>
@@ -442,8 +448,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>41</x>
-      <y>230</y>
+      <x>211</x>
+      <y>210</y>
       <width>381</width>
       <height>27</height>
      </rect>
@@ -510,15 +516,15 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox"/>
+      <widget class="QComboBox" name="cmbMuni"/>
      </item>
     </layout>
    </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>100</y>
+      <x>210</x>
+      <y>80</y>
       <width>594</width>
       <height>37</height>
      </rect>
@@ -562,7 +568,7 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
      <item>
       <widget class="QLineEdit" name="txtDNI">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -652,13 +658,77 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
      </item>
     </layout>
    </widget>
+   <widget class="QTableWidget" name="tabClientes">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>400</y>
+      <width>901</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <column>
+     <property name="text">
+      <string>DNI</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Apellidos</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Nombre</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Fecha Alta</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Formas de Pago</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="btnLimpiar">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>80</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>img/refrescar.png</normaloff>img/refrescar.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>44</width>
+      <height>44</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>811</width>
+     <width>1077</width>
      <height>21</height>
     </rect>
    </property>
@@ -688,11 +758,11 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chkGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>

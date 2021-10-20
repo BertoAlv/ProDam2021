@@ -3,12 +3,15 @@
 Funciones gestion clientes
 
 '''
+import eventos
 import var
 from ventana import *
 
 class Clientes():
     def validarDNI():
         try:
+            global dnivalido
+            dnivalido = False
             dni = var.ui.txtDNI.text()
             var.ui.txtDNI.setText(dni.upper())
             tabla = 'TRWAGMYFPDXBNJZSQVHLCKE' #letras DNI
@@ -24,6 +27,7 @@ class Clientes():
                 if len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni) % 23] == dig_control:
                     var.ui.lblValidoDNI.setStyleSheet('QLabel {color:green;}')
                     var.ui.lblValidoDNI.setText('V')
+                    dnivalido = True
                 else:
                     var.ui.lblValidoDNI.setStyleSheet('QLabel {color:red;}')
                     var.ui.lblValidoDNI.setText('X')
@@ -72,3 +76,79 @@ class Clientes():
             return prov
         except Exception as error:
             print('Error en la seleccion de provincia', error)
+
+    def cargarFecha(qDate):
+        try:
+            data= ('{0}/{1}/{2}'.format(qDate.day(),qDate.month(),qDate.year()))
+            var.ui.txtFchAlta.setText(str(data))
+            var.dlgcalendar.hide()
+        except Exception as error:
+            print('Error cargar fecha en txtFecha ',error)
+
+
+    def letracapital():
+        try:
+            nome = var.ui.txtNome.text()
+            var.ui.txtNome.setText(nome.title())
+            apelido = var.ui.txtApel.text()
+            var.ui.txtApel.setText(apelido.title())
+            direccion = var.ui.txtDir.text()
+            var.ui.txtDir.setText(direccion.title())
+        except Exception as error:
+            print('Error en mayuscula', error)
+
+    def guardaCli(self):
+        try:
+            #preparamos el registro
+            newcli=[]  #Para base de datos
+            tabcli = []   #Para table widget
+            client =[var.ui.txtDNI,var.ui.txtApel,var.ui.txtNome,var.ui.txtFchAlta]
+            #Codigo para cargar en la tabla
+            for i in client:
+                tabcli.append(i.text())
+            pagos = []
+            if var.ui.chkCargocuenta.isChecked():
+                pagos.append('Cargo Cuenta')
+            if var.ui.chkEfectivo.isChecked():
+                pagos.append('Efectivo')
+            if var.ui.chkTransferencia.isChecked():
+                pagos.append('Transferencia')
+            if var.ui.chkTarjeta.isChecked():
+                pagos.append('Tarjeta')
+            pagos = set(pagos) #evita duplicados
+            tabcli.append(', '.join(pagos))
+            if dnivalido:
+                row=0
+                column=0
+                var.ui.tabClientes.insertRow(row)
+                for campo in tabcli:
+                    cell=QtWidgets.QTableWidgetItem(str(campo))
+                    var.ui.tabClientes.setItem(row,column,cell)
+                    column += 1
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText('DNI no valido')
+                msg.exec()
+            #Codigo para grabar en la base de datos
+        except Exception as error:
+            print('Error en guardar clientes ', error)
+
+    def limpiaFormCli(self):
+        try:
+            cajas = [var.ui.txtDNI, var.ui.txtApel, var.ui.txtNome, var.ui.txtFchAlta,var.ui.txtDir]
+            for i in cajas:
+                i.setText('')
+            var.ui.rbtGroupSex.setExclusive(False)
+            var.ui.rbtFem.setChecked(False)
+            var.ui.rbtHom.setChecked(False)
+            var.ui.rbtGroupSex.setExclusive(True)
+            var.ui.chkTarjeta.setChecked(False)
+            var.ui.chkTransferencia.setChecked(False)
+            var.ui.chkEfectivo.setChecked(False)
+            var.ui.chkCargocuenta.setChecked(False)
+            var.ui.cmbProv.setCurrentIndex(0)
+            var.ui.cmbMuni.setCurrentIndex(0)
+        except Exception as error:
+            print('Error en guardar clientes', error)

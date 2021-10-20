@@ -9,8 +9,10 @@ from windowaviso import *
 from windowcal import *
 
 
+
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
 class DialogCalendar(QtWidgets.QDialog):
     def __init__(self):
         super(DialogCalendar, self).__init__()
@@ -20,7 +22,7 @@ class DialogCalendar(QtWidgets.QDialog):
         mes_actual = datetime.now().month
         ano_actual = datetime.now().year
         var.dlgcalendar.Calendar.setSelectedDate((QtCore.QDate(ano_actual,mes_actual,dia_actual)))
-     #   var.dlgcalendar.Calendar.clicked.connect(clientes.Clientes.cargarFecha)
+        var.dlgcalendar.Calendar.clicked.connect(clientes.Clientes.cargarFecha)
 
 class DialogAviso(QtWidgets.QDialog):
     def __init__(self):
@@ -41,13 +43,21 @@ class Main(QtWidgets.QMainWindow):
         var.ui.rbtGroupSex.buttonClicked.connect(clientes.Clientes.SelSexo)
         var.ui.chkGroupPago.buttonClicked.connect(clientes.Clientes.selPago)
         var.ui.btnFchAlta.clicked.connect(eventos.Eventos.abrirCal)
+        var.ui.btnGrabaCli.clicked.connect(clientes.Clientes.guardaCli)
+        var.ui.btnLimpiar.clicked.connect(clientes.Clientes.limpiaFormCli)
+
 #Eventos de la barra de menús
         var.ui.actionSalir.triggered.connect(eventos.Eventos.Salir)
 #Eventos de texto
         var.ui.txtDNI.editingFinished.connect(clientes.Clientes.validarDNI)
+        var.ui.txtNome.editingFinished.connect(clientes.Clientes.letracapital)
+        var.ui.txtApel.editingFinished.connect(clientes.Clientes.letracapital)
+        var.ui.txtDir.editingFinished.connect(clientes.Clientes.letracapital)
 #Eventos de comboBox
         clientes.Clientes.cargaProv_(self)
         var.ui.cmbProv.activated[str].connect(clientes.Clientes.selProv)
+#Eventos de QTabWidget
+        eventos.Eventos.resizeTabClientes(self)
 
 
 
