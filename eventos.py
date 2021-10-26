@@ -22,7 +22,7 @@ class Eventos():
     def resizeTabClientes(self):
         try:
             header = var.ui.tabClientes.horizontalHeader()
-            for i in range(5):
+            for i in range(6):
                 header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
                 if i == 0 or i == 3:
                      header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)

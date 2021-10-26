@@ -3,6 +3,7 @@
 Funciones gestion clientes
 
 '''
+import conexion
 import eventos
 import var
 from ventana import *
@@ -27,6 +28,7 @@ class Clientes():
                 if len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni) % 23] == dig_control:
                     var.ui.lblValidoDNI.setStyleSheet('QLabel {color:green;}')
                     var.ui.lblValidoDNI.setText('V')
+                    var.ui.txtDNI.setStyleSheet('background-color: white')
                     dnivalido = True
                 else:
                     var.ui.lblValidoDNI.setStyleSheet('QLabel {color:red;}')
@@ -64,7 +66,7 @@ class Clientes():
     def cargaProv_(self):
         try:
             var.ui.cmbProv.clear()
-            prov = ['','A Coruña','Lugo','Ourense','Pontevedra','Vigo']
+            prov = ['','A Coruña','Lugo','Ourense','Pontevedra']
             for i in prov:
                 var.ui.cmbProv.addItem(i)
         except Exception as error:
@@ -76,6 +78,7 @@ class Clientes():
             return prov
         except Exception as error:
             print('Error en la seleccion de provincia', error)
+
 
     def cargarFecha(qDate):
         try:
@@ -100,12 +103,21 @@ class Clientes():
     def guardaCli(self):
         try:
             #preparamos el registro
-            newcli=[]  #Para base de datos
+            newcli = []
+            cliente=[var.ui.txtDNI,var.ui.txtFchAlta,var.ui.txtApel,var.ui.txtNome,var.ui.txtDir]  #Para base de datos
             tabcli = []   #Para table widget
             client =[var.ui.txtDNI,var.ui.txtApel,var.ui.txtNome,var.ui.txtFchAlta]
             #Codigo para cargar en la tabla
+            for i in cliente:
+                newcli.append(i.text())
             for i in client:
                 tabcli.append(i.text())
+                newcli.append(var.ui.cmbProv.currentText())
+                newcli.append(var.ui.cmbMuni.currentText())
+                if var.ui.rbtHom.isChecked():
+                    newcli.append('Hombre')
+                elif var.ui.rbtFem.isChecked():
+                    newcli.append('Mujer')
             pagos = []
             if var.ui.chkCargocuenta.isChecked():
                 pagos.append('Cargo Cuenta')
@@ -116,7 +128,9 @@ class Clientes():
             if var.ui.chkTarjeta.isChecked():
                 pagos.append('Tarjeta')
             pagos = set(pagos) #evita duplicados
+            newcli.append(', '.join(pagos))
             tabcli.append(', '.join(pagos))
+            print(newcli)
             if dnivalido:
                 row=0
                 column=0
@@ -125,6 +139,7 @@ class Clientes():
                     cell=QtWidgets.QTableWidgetItem(str(campo))
                     var.ui.tabClientes.setItem(row,column,cell)
                     column += 1
+                conexion.Conexion.altaCli(newcli)
             else:
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
@@ -152,3 +167,14 @@ class Clientes():
             var.ui.cmbMuni.setCurrentIndex(0)
         except Exception as error:
             print('Error en guardar clientes', error)
+
+    def cargaCli(self):
+        try:
+            fila = var.ui.tabClientes.selectedItems()
+            datos = [var.ui.txtDNI, var.ui.txtApel, var.ui.txtNome, var.ui.txtFchAlta, var.ui.txtDir]
+            if fila:
+                row = [dato.text() for dato in fila]
+            for i, dato in enumerate(datos):
+                dato.setText(row[i])
+        except Exception as error:
+            print('Error en cargar los datos del cliente', error)

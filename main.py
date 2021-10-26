@@ -1,5 +1,7 @@
 # This is a sample Python script.
 import sys
+
+import conexion
 import eventos
 import clientes
 import var
@@ -58,6 +60,10 @@ class Main(QtWidgets.QMainWindow):
         var.ui.cmbProv.activated[str].connect(clientes.Clientes.selProv)
 #Eventos de QTabWidget
         eventos.Eventos.resizeTabClientes(self)
+        var.ui.tabClientes.clicked.connect(clientes.Clientes.cargaCli)
+        var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+#Eventos Base de Datos
+        conexion.Conexion.db_connect(var.filedb)
 
 
 
