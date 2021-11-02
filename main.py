@@ -64,12 +64,16 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 #Eventos Base de Datos
         conexion.Conexion.db_connect(var.filedb)
-
+        conexion.Conexion.cargarTabCli(self)
 
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     ventana = Main()
+    desktop = QtWidgets.QApplication.desktop()
+    x = (desktop.width() - ventana.width()) // 2
+    y = (desktop.height() - ventana.height()) // 2
+    ventana.move(x,y)
     var.dlgaviso = DialogAviso()
     var.dlgcalendar = DialogCalendar()
     ventana.show()

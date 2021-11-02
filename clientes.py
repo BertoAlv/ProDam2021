@@ -7,6 +7,7 @@ import conexion
 import eventos
 import var
 from ventana import *
+from PyQt5 import QtSql
 
 class Clientes():
     def validarDNI():
@@ -112,12 +113,12 @@ class Clientes():
                 newcli.append(i.text())
             for i in client:
                 tabcli.append(i.text())
-                newcli.append(var.ui.cmbProv.currentText())
-                newcli.append(var.ui.cmbMuni.currentText())
-                if var.ui.rbtHom.isChecked():
-                    newcli.append('Hombre')
-                elif var.ui.rbtFem.isChecked():
-                    newcli.append('Mujer')
+            newcli.append(var.ui.cmbProv.currentText())
+            newcli.append(var.ui.cmbMuni.currentText())
+            if var.ui.rbtHom.isChecked():
+                newcli.append('Hombre')
+            elif var.ui.rbtFem.isChecked():
+                newcli.append('Mujer')
             pagos = []
             if var.ui.chkCargocuenta.isChecked():
                 pagos.append('Cargo Cuenta')
@@ -137,7 +138,7 @@ class Clientes():
                 var.ui.tabClientes.insertRow(row)
                 for campo in tabcli:
                     cell=QtWidgets.QTableWidgetItem(str(campo))
-                    var.ui.tabClientes.setItem(row,column,cell)
+                    var.ui.tabClientes.setItem(row, column, cell)
                     column += 1
                 conexion.Conexion.altaCli(newcli)
             else:
@@ -170,11 +171,35 @@ class Clientes():
 
     def cargaCli(self):
         try:
+            prueba = '39487789D'
+            query = QtSql.QSqlQuery()
             fila = var.ui.tabClientes.selectedItems()
-            datos = [var.ui.txtDNI, var.ui.txtApel, var.ui.txtNome, var.ui.txtFchAlta, var.ui.txtDir]
+            datos = [var.ui.txtDNI, var.ui.txtApel, var.ui.txtNome, var.ui.txtFchAlta]
             if fila:
                 row = [dato.text() for dato in fila]
+            print(row)
             for i, dato in enumerate(datos):
                 dato.setText(row[i])
+            if 'Efectivo' in row[4]:
+                var.ui.chkEfectivo.setChecked(True)
+            if 'Transferencia' in row[4]:
+                var.ui.chkTransferencia.setChecked(True)
+            if 'Tarjeta' in row[4]:
+                var.ui.chkTarjeta.setChecked(True)
+            if 'Cargo' in row[4]:
+                var.ui.chkCargocuenta.setChecked(True)
+            consulta = query.prepare("SELECT direccion, provincia, sexo FROM clientes WHERE dni = " + "'" ++"'")
+
+            if query.exec_():
+                while query.next():
+                    direccion = query.value(0)
+                    provincia = query.value(1)
+                    sexo = query.value(2)
+                    var.ui.txtDir.setText(direccion)
+                    var.ui.cmbProv.setCurrentIndex(1)
+                    if sexo == 'Hombre':
+                        var.ui.rbtHom.setChecked(True)
+                    else:
+                        var.ui.rbtFem.setChecked(True)
         except Exception as error:
             print('Error en cargar los datos del cliente', error)
