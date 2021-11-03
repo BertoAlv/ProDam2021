@@ -7,7 +7,7 @@ import conexion
 import eventos
 import var
 from ventana import *
-from PyQt5 import QtSql
+
 
 class Clientes():
     def validarDNI():
@@ -133,14 +133,8 @@ class Clientes():
             tabcli.append(', '.join(pagos))
             print(newcli)
             if dnivalido:
-                row=0
-                column=0
-                var.ui.tabClientes.insertRow(row)
-                for campo in tabcli:
-                    cell=QtWidgets.QTableWidgetItem(str(campo))
-                    var.ui.tabClientes.setItem(row, column, cell)
-                    column += 1
                 conexion.Conexion.altaCli(newcli)
+                conexion.Conexion.cargarTabCli(self)
             else:
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
@@ -150,6 +144,15 @@ class Clientes():
             #Codigo para grabar en la base de datos
         except Exception as error:
             print('Error en guardar clientes ', error)
+
+    def bajaCli(self):
+        try:
+            dni = var.ui.txtDNI.text()
+            conexion.Conexion.bajaCli(dni)
+            conexion.Conexion.cargarTabCli(self)
+
+        except Exception as error:
+            print('Error en baja cliente ',error)
 
     def limpiaFormCli(self):
         try:
@@ -171,8 +174,7 @@ class Clientes():
 
     def cargaCli(self):
         try:
-            prueba = '39487789D'
-            query = QtSql.QSqlQuery()
+            Clientes.limpiaFormCli(self)
             fila = var.ui.tabClientes.selectedItems()
             datos = [var.ui.txtDNI, var.ui.txtApel, var.ui.txtNome, var.ui.txtFchAlta]
             if fila:
@@ -188,18 +190,15 @@ class Clientes():
                 var.ui.chkTarjeta.setChecked(True)
             if 'Cargo' in row[4]:
                 var.ui.chkCargocuenta.setChecked(True)
-            consulta = query.prepare("SELECT direccion, provincia, sexo FROM clientes WHERE dni = " + "'" ++"'")
 
-            if query.exec_():
-                while query.next():
-                    direccion = query.value(0)
-                    provincia = query.value(1)
-                    sexo = query.value(2)
-                    var.ui.txtDir.setText(direccion)
-                    var.ui.cmbProv.setCurrentIndex(1)
-                    if sexo == 'Hombre':
-                        var.ui.rbtHom.setChecked(True)
-                    else:
-                        var.ui.rbtFem.setChecked(True)
+            registro = conexion.Conexion.oneCli(row[0])
+            var.ui.txtDir.setText(str(registro[0]))
+            var.ui.cmbProv.setCurrentText(str(registro[1]))
+            var.ui.cmbMuni.setCurrentText(str(registro[2]))
+            if str(registro[3]) == 'Hombre':
+                var.ui.rbtHom.setChecked(True)
+            else:
+                var.ui.rbtFem.setChecked(True)
+
         except Exception as error:
             print('Error en cargar los datos del cliente', error)

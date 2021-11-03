@@ -53,12 +53,32 @@ class Conexion():
         except Exception as error:
             print('Problemas alta cliente',error)
 
+    def bajaCli(dni):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('DELETE FROM clientes WHERE dni = :dni')
+            query.bindValue(':dni', str(dni))
+            if query.exec_():
+                print('Baja correcta')
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Cliente dado de baja')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+        except Exception as error:
+            print('Error baja cliente en conexion ', error)
 
     def cargarTabCli(self):
         try:
             index = 0
             query = QtSql.QSqlQuery()
-            query.prepare('SELECT dni, apellidos, nombre, alta, pago FROM clientes')
+            query.prepare('SELECT dni, apellidos, nombre, alta, pago FROM clientes order by apellidos, nombre')
             if query.exec_():
                 while query.next():
                     dni = query.value(0)
@@ -76,3 +96,17 @@ class Conexion():
 
         except Exception as error:
             print('Problemas al mostrar tabla clientes',error)
+
+    def oneCli(dni):
+        try:
+            record = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select direccion, provincia, municipio, sexo from clientes where dni = :dni')
+            query.bindValue(':dni', dni)
+            if query.exec_():
+                while query.next():
+                    for i in range(4):
+                        record.append(query.value(i))
+            return record
+        except Exception as error:
+            print('Problemas cargar datos cliente', error)

@@ -47,6 +47,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnFchAlta.clicked.connect(eventos.Eventos.abrirCal)
         var.ui.btnGrabaCli.clicked.connect(clientes.Clientes.guardaCli)
         var.ui.btnLimpiar.clicked.connect(clientes.Clientes.limpiaFormCli)
+        var.ui.btnEliminar.clicked.connect(clientes.Clientes.bajaCli)
 
 #Eventos de la barra de menús
         var.ui.actionSalir.triggered.connect(eventos.Eventos.Salir)
