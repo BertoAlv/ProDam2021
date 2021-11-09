@@ -9,6 +9,7 @@ import var
 from ventana import *
 
 
+
 class Clientes():
     def validarDNI():
         try:
@@ -63,15 +64,6 @@ class Clientes():
                 print('Has seleccionado cargo cuenta')
         except Exception as error:
             print('Error en módulo seleccionar forma de pago', error)
-
-    def cargaProv_(self):
-        try:
-            var.ui.cmbProv.clear()
-            prov = ['','A Coruña','Lugo','Ourense','Pontevedra']
-            for i in prov:
-                var.ui.cmbProv.addItem(i)
-        except Exception as error:
-            print('Error en módulo cargar provincias', error)
 
     def selProv(prov):
         try:
@@ -145,6 +137,35 @@ class Clientes():
         except Exception as error:
             print('Error en guardar clientes ', error)
 
+    def modifCli(self):
+        try:
+            modcliente = []
+            cliente = [var.ui.txtDNI, var.ui.txtFchAlta, var.ui.txtApel, var.ui.txtNome, var.ui.txtDir]
+            for i in cliente:
+                modcliente.append(i.text())
+            modcliente.append(var.ui.cmbProv.currentText())
+            modcliente.append(var.ui.cmbMuni.currentText())
+            if var.ui.rbtHom.isChecked():
+                modcliente.append('Hombre')
+            elif var.ui.rbtFem.isChecked():
+                modcliente.append('Mujer')
+            pagos = []
+            if var.ui.chkCargocuenta.isChecked():
+                pagos.append('Cargo cuenta')
+            if var.ui.chkEfectivo.isChecked():
+                pagos.append('Efectivo')
+            if var.ui.chkTransferencia.isChecked():
+                pagos.append('Transferencia')
+            if var.ui.chkTarjeta.isChecked():
+                pagos.append('Tarjeta')
+            pagos = set(pagos)  # evita duplicados
+            modcliente.append(', '.join(pagos))
+            conexion.Conexion.modifCli(modcliente)
+            conexion.Conexion.cargarTabCli(self)
+
+        except Exception as error:
+            print('Error en modificar cliente. ', error)
+
     def bajaCli(self):
         try:
             dni = var.ui.txtDNI.text()
@@ -202,3 +223,7 @@ class Clientes():
 
         except Exception as error:
             print('Error en cargar los datos del cliente', error)
+
+
+
+

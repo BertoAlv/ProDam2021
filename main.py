@@ -1,4 +1,5 @@
 # This is a sample Python script.
+import locale
 import sys
 
 import conexion
@@ -9,6 +10,7 @@ from datetime import *
 from ventana import *
 from windowaviso import *
 from windowcal import *
+locale.setlocale(locale.LC_ALL, 'es-ES')
 
 
 
@@ -48,6 +50,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnGrabaCli.clicked.connect(clientes.Clientes.guardaCli)
         var.ui.btnLimpiar.clicked.connect(clientes.Clientes.limpiaFormCli)
         var.ui.btnEliminar.clicked.connect(clientes.Clientes.bajaCli)
+        var.ui.btnModificar.clicked.connect(clientes.Clientes.modifCli)
 
 #Eventos de la barra de menús
         var.ui.actionSalir.triggered.connect(eventos.Eventos.Salir)
@@ -57,8 +60,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.txtApel.editingFinished.connect(clientes.Clientes.letracapital)
         var.ui.txtDir.editingFinished.connect(clientes.Clientes.letracapital)
 #Eventos de comboBox
-        clientes.Clientes.cargaProv_(self)
         var.ui.cmbProv.activated[str].connect(clientes.Clientes.selProv)
+        var.ui.cmbProv.currentIndexChanged.connect(conexion.Conexion.cargaMuni)
+
 #Eventos de QTabWidget
         eventos.Eventos.resizeTabClientes(self)
         var.ui.tabClientes.clicked.connect(clientes.Clientes.cargaCli)
@@ -66,6 +70,13 @@ class Main(QtWidgets.QMainWindow):
 #Eventos Base de Datos
         conexion.Conexion.db_connect(var.filedb)
         conexion.Conexion.cargarTabCli(self)
+        conexion.Conexion.cargaProv(self)
+        conexion.Conexion.cargaMuni(self)
+#Barra de Estado
+
+        var.ui.statusbar.addPermanentWidget(var.ui.lblFecha, 1)
+        today = date.today()
+        var.ui.lblFecha.setText(today.strftime("%A, %d de %B de %Y").title())
 
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 import sys
 import var
 from ventana import *
+from datetime import date
 
 class Eventos():
     def Salir(self):
@@ -28,3 +29,4 @@ class Eventos():
                      header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as error:
             print('Error en resize de la tabla',error)
+
