@@ -6,6 +6,7 @@ global ui
 global dlgaviso
 global dlgcalendar
 global dlgerror
+global dlgabrir
 
 '''
 otras variables

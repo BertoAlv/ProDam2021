@@ -14,6 +14,12 @@ class Eventos():
         except Exception as error:
             print('Error en módulo salir ', error)
 
+    def Abrir(self):
+        try:
+            var.dlgabrir.show()
+        except Exception as error:
+            print('Error en módulo abrir', error)
+
     def abrirCal(self):
         try:
             var.dlgcalendar.show()
