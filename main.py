@@ -61,6 +61,14 @@ class Main(QtWidgets.QMainWindow):
 #Eventos de la barra de menús y herramientas
         var.ui.actionSalir.triggered.connect(eventos.Eventos.Salir)
         var.ui.actionAbrir.triggered.connect(eventos.Eventos.Abrir)
+        var.ui.actionImprimir.triggered.connect(eventos.Eventos.Imprimir)
+        var.ui.actionCrear_Backup.triggered.connect(eventos.Eventos.crearBackup)
+        var.ui.actionRestaurarBD.triggered.connect(eventos.Eventos.restaurarBD)
+        var.ui.actionbarOpenFile.triggered.connect(eventos.Eventos.Abrir)
+        var.ui.actionbarSalir.triggered.connect(eventos.Eventos.Salir)
+        var.ui.actionbarCrearBU.triggered.connect(eventos.Eventos.crearBackup)
+        var.ui.actionbarRecuperarBU.triggered.connect(eventos.Eventos.restaurarBD)
+        var.ui.actionbarImprimir.triggered.connect(eventos.Eventos.Imprimir)
 #Eventos de texto
         var.ui.txtDNI.editingFinished.connect(clientes.Clientes.validarDNI)
         var.ui.txtNome.editingFinished.connect(clientes.Clientes.letracapital)
@@ -80,10 +88,9 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.cargaProv(self)
         conexion.Conexion.cargaMuni(self)
 #Barra de Estado
-
-        var.ui.statusbar.addPermanentWidget(var.ui.lblFecha, 1)
+        var.ui.statusbar.addPermanentWidget(var.ui.lblStatus, 1)
         today = date.today()
-        var.ui.lblFecha.setText(today.strftime("%A, %d de %B de %Y").title())
+        var.ui.lblStatus.setText(today.strftime("%A, %d de %B de %Y").title())
 
 
 if __name__ == '__main__':

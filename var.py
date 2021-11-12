@@ -7,6 +7,7 @@ global dlgaviso
 global dlgcalendar
 global dlgerror
 global dlgabrir
+global copia
 
 '''
 otras variables
