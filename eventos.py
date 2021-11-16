@@ -8,6 +8,7 @@ from datetime import date, datetime
 from zipfile import ZipFile
 import conexion
 from PyQt5 import QtPrintSupport
+import xlrd
 
 class Eventos():
     def Salir(self):
@@ -94,3 +95,28 @@ class Eventos():
                 printDialog.show()
         except Exception as error:
             print('Error imprimir',error)
+
+    def ImportarExcel(self):
+        try:
+            newcli=[]
+            cliente = [var.ui.txtDNI, var.ui.txtFchAlta, var.ui.txtApel, var.ui.txtNome, var.ui.txtDir]
+            contador=0
+            option = QtWidgets.QFileDialog.Options()
+            ruta_excel = var.dlgabrir.getOpenFileName(None, 'Importar Excel','','*.xls',options = option)
+            if var.dlgabrir.Accepted and ruta_excel != '':
+                fichero = ruta_excel[0]
+            workbook = xlrd.open_workbook(fichero)
+            hoja = workbook.sheet_by_index(0)
+            # while contador < hoja.ncols:
+            #     for i in range (0,hoja.nrows):
+            #         print(hoja.cell_value(i,contador))
+            #     contador = contador+1
+            while contador < hoja.nrows:
+                for i in range (0,6):
+                    newcli.append(hoja.cell_value(1,i))
+                    conexion.Conexion.altaCli(newcli)
+                    conexion.Conexion.cargarTabCli(self)
+                newcli = []
+                contador = contador + 1
+        except Exception as error:
+            print('Error al importar ',error)

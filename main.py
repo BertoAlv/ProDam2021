@@ -61,6 +61,7 @@ class Main(QtWidgets.QMainWindow):
 #Eventos de la barra de menús y herramientas
         var.ui.actionSalir.triggered.connect(eventos.Eventos.Salir)
         var.ui.actionAbrir.triggered.connect(eventos.Eventos.Abrir)
+        var.ui.actionImportar_Datos.triggered.connect(eventos.Eventos.ImportarExcel)
         var.ui.actionImprimir.triggered.connect(eventos.Eventos.Imprimir)
         var.ui.actionCrear_Backup.triggered.connect(eventos.Eventos.crearBackup)
         var.ui.actionRestaurarBD.triggered.connect(eventos.Eventos.restaurarBD)
