@@ -72,6 +72,19 @@ class Clientes():
         except Exception as error:
             print('Error en la seleccion de provincia', error)
 
+    def selEnvio(self):
+        try:
+            if var.ui.spinEnvio.value() == 0:
+                var.ui.lblEnvio.setText('Recogida cliente')
+            if var.ui.spinEnvio.value() == 1:
+                var.ui.lblEnvio.setText('Envio nacional')
+            if var.ui.spinEnvio.value() == 2:
+                var.ui.lblEnvio.setText('Envio urgente')
+            if var.ui.spinEnvio.value() == 3:
+                var.ui.lblEnvio.setText('Envio Internacional')
+        except Exception as error:
+            print('Error modulo seleccionar envio')
+
 
     def cargarFecha(qDate):
         try:
@@ -123,6 +136,7 @@ class Clientes():
             pagos = set(pagos) #evita duplicados
             newcli.append(', '.join(pagos))
             tabcli.append(', '.join(pagos))
+            newcli.append(var.ui.spinEnvio.text())
             print(newcli)
             if dnivalido:
                 conexion.Conexion.altaCli(newcli)
@@ -160,6 +174,7 @@ class Clientes():
                 pagos.append('Tarjeta')
             pagos = set(pagos)  # evita duplicados
             modcliente.append(', '.join(pagos))
+            modcliente.append(var.ui.spinEnvio.text())
             conexion.Conexion.modifCli(modcliente)
             conexion.Conexion.cargarTabCli(self)
 
@@ -190,6 +205,7 @@ class Clientes():
             var.ui.chkCargocuenta.setChecked(False)
             var.ui.cmbProv.setCurrentIndex(0)
             var.ui.cmbMuni.setCurrentIndex(0)
+            var.ui.spinEnvio.setValue(0)
         except Exception as error:
             print('Error en guardar clientes', error)
 

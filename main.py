@@ -1,7 +1,6 @@
 # This is a sample Python script.
 import locale
 import sys
-
 import conexion
 import eventos
 import clientes
@@ -62,6 +61,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionSalir.triggered.connect(eventos.Eventos.Salir)
         var.ui.actionAbrir.triggered.connect(eventos.Eventos.Abrir)
         var.ui.actionImportar_Datos.triggered.connect(eventos.Eventos.ImportarExcel)
+        var.ui.actionExportar_Datos.triggered.connect(eventos.Eventos.ExportarExcel)
         var.ui.actionImprimir.triggered.connect(eventos.Eventos.Imprimir)
         var.ui.actionCrear_Backup.triggered.connect(eventos.Eventos.crearBackup)
         var.ui.actionRestaurarBD.triggered.connect(eventos.Eventos.restaurarBD)
@@ -92,6 +92,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.statusbar.addPermanentWidget(var.ui.lblStatus, 1)
         today = date.today()
         var.ui.lblStatus.setText(today.strftime("%A, %d de %B de %Y").title())
+
+#Eventos de SpinBox
+        var.ui.spinEnvio.valueChanged.connect(clientes.Clientes.selEnvio)
 
 
 if __name__ == '__main__':

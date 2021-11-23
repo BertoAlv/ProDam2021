@@ -7,8 +7,10 @@ from ventana import *
 from datetime import date, datetime
 from zipfile import ZipFile
 import conexion
-from PyQt5 import QtPrintSupport
+import pandas as pd
+from PyQt5 import QtPrintSupport, QtSql
 import xlrd
+
 
 class Eventos():
     def Salir(self):
@@ -25,7 +27,7 @@ class Eventos():
         try:
             var.dlgcalendar.show()
         except Exception as error:
-            print('Error al abrir calendario',error)
+            print('Error al abrir calendario', error)
 
     def resizeTabClientes(self):
         try:
@@ -33,9 +35,9 @@ class Eventos():
             for i in range(5):
                 header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
                 if i == 0 or i == 3:
-                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as error:
-            print('Error en resize de la tabla',error)
+            print('Error en resize de la tabla', error)
 
     def Abrir(self):
         try:
@@ -49,7 +51,8 @@ class Eventos():
             fecha = fecha.strftime('%Y.%m.%d.%H.%M.%S')
             var.copia = (str(fecha) + '_backup.zip')
             option = QtWidgets.QFileDialog.Options()
-            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar Copia', var.copia, '.zip', options = option)
+            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar Copia', var.copia, '.zip',
+                                                                options=option)
             if var.dlgabrir.Accepted and filename != '':
                 fichzip = zipfile.ZipFile(var.copia, 'w')
                 fichzip.write(var.filedb, os.path.basename(var.filedb), zipfile.ZIP_DEFLATED)
@@ -68,11 +71,11 @@ class Eventos():
     def restaurarBD(self):
         try:
             option = QtWidgets.QFileDialog.Options()
-            filename = var.dlgabrir.getOpenFileName(None, 'Restaurar Datos', '', '*.zip',options = option)
+            filename = var.dlgabrir.getOpenFileName(None, 'Restaurar Datos', '', '*.zip', options=option)
             if var.dlgabrir.Accepted and filename != '':
                 fichero = filename[0]
                 print(fichero)
-                with zipfile.ZipFile(str(fichero),'r') as bbdd:
+                with zipfile.ZipFile(str(fichero), 'r') as bbdd:
                     bbdd.extractall(pwd=None)
                 bbdd.close()
             conexion.Conexion.db_connect(var.filedb)
@@ -86,7 +89,7 @@ class Eventos():
             msg.setText('Backup creado con éxito')
             msg.exec()
         except Exception as error:
-            print('Error al restaurar la BD desde el backup',error)
+            print('Error al restaurar la BD desde el backup', error)
 
     def Imprimir(self):
         try:
@@ -94,29 +97,62 @@ class Eventos():
             if printDialog.exec():
                 printDialog.show()
         except Exception as error:
-            print('Error imprimir',error)
+            print('Error imprimir', error)
 
     def ImportarExcel(self):
         try:
-            newcli=[]
-            cliente = [var.ui.txtDNI, var.ui.txtFchAlta, var.ui.txtApel, var.ui.txtNome, var.ui.txtDir]
-            contador=0
+            newcli = []
+            contador = 0
             option = QtWidgets.QFileDialog.Options()
-            ruta_excel = var.dlgabrir.getOpenFileName(None, 'Importar Excel','','*.xls',options = option)
+            ruta_excel = var.dlgabrir.getOpenFileName(None, 'Importar Excel', '', '*.xls', options=option)
             if var.dlgabrir.Accepted and ruta_excel != '':
                 fichero = ruta_excel[0]
             workbook = xlrd.open_workbook(fichero)
             hoja = workbook.sheet_by_index(0)
-            # while contador < hoja.ncols:
-            #     for i in range (0,hoja.nrows):
-            #         print(hoja.cell_value(i,contador))
-            #     contador = contador+1
             while contador < hoja.nrows:
-                for i in range (0,6):
-                    newcli.append(hoja.cell_value(1,i))
-                    conexion.Conexion.altaCli(newcli)
-                    conexion.Conexion.cargarTabCli(self)
-                newcli = []
+                for i in range(6):
+                    if i == 1:
+                        newcli.append((str)(date.today()))
+                    if i == 5:
+                        newcli.append('')
+                    newcli.append(hoja.cell_value(contador + 1, i))
+                newcli.append('')
+                newcli.append(0)
+                conexion.Conexion.altaCli(newcli)
+                conexion.Conexion.cargarTabCli(newcli)
+                newcli.clear()
                 contador = contador + 1
         except Exception as error:
-            print('Error al importar ',error)
+            print('Error al importar ', error)
+
+    def ExportarExcel(self):
+        try:
+            info = []
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT dni, alta, apellidos, nombre, direccion, provincia, municipio, sexo, pago, envio FROM clientes')
+            if query.exec_():
+                while query.next():
+                    datos = {'DNI': query.value(0),
+                             'ALTA': query.value(1),
+                             'APELLIDOS': query.value(2),
+                             'NOMBRE': query.value(3),
+                             'DIRECCION': query.value(4),
+                             'PROVINCIA': query.value(5),
+                             'MUNICIPIO': query.value(6),
+                             'SEXO': query.value(7),
+                             'PAGO': query.value(8),
+                             'ENVIO': query.value(9)}
+
+                    info.append(datos)
+
+                df_clientes = pd.DataFrame(info,columns=['DNI', 'ALTA', 'APELLIDOS', 'NOMBRE', 'DIRECCION', 'PROVINCIA',
+                                                    'MUNICIPIO', 'SEXO', 'PAGO', 'ENVIO'])
+                df_clientes.to_csv('clientes.csv', encoding='utf8-', sep=",", index=False, header=True)
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Exportacion')
+                msg.setModal(True)
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Exportado a csv con éxito')
+                msg.exec()
+        except Exception as error:
+            print('Error exportacion', error)
