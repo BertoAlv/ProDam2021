@@ -899,7 +899,7 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>420</x>
+        <x>440</x>
         <y>190</y>
         <width>340</width>
         <height>27</height>
@@ -986,17 +986,227 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
      <attribute name="title">
       <string>Artículos</string>
      </attribute>
-     <widget class="QLabel" name="label_2">
+     <widget class="Line" name="line_2">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>130</y>
-        <width>211</width>
-        <height>21</height>
+        <x>90</x>
+        <y>150</y>
+        <width>721</width>
+        <height>16</height>
        </rect>
       </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tabArt">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>270</y>
+        <width>831</width>
+        <height>401</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Código</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nombre Artículo</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Precio</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>100</y>
+        <width>701</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <item>
+        <widget class="QLabel" name="lblNomeArt">
+         <property name="text">
+          <string>Nombre del artículo:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtNomeArt"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="lblPrecio">
+         <property name="text">
+          <string>Precio:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtPrecio">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>65</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>190</y>
+        <width>341</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_10">
+       <item>
+        <widget class="QPushButton" name="btnAltaArt">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Guardar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnEliminarArt">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnModArt">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Modificar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnSalirArt">
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Salir</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>50</y>
+        <width>269</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_11">
+       <item>
+        <widget class="QLabel" name="lblCodArt">
+         <property name="text">
+          <string>Codigo articulo:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>27</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="txtCodArt"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="btnLimpiarArt">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>50</y>
+        <width>32</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
       <property name="text">
-       <string>EN CONSTRUCCION ARTICULOS</string>
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normalon>img/refrescar.png</normalon>
+       </iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>44</width>
+        <height>44</height>
+       </size>
+      </property>
+      <property name="flat">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
@@ -1069,8 +1279,21 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
     <addaction name="actionCrear_Backup"/>
     <addaction name="actionRestaurarBD"/>
    </widget>
+   <widget class="QMenu" name="menuInformes">
+    <property name="title">
+     <string>Informes</string>
+    </property>
+    <addaction name="actionListado_clientes"/>
+   </widget>
+   <widget class="QMenu" name="menuAcercaDe">
+    <property name="title">
+     <string>Acerca de</string>
+    </property>
+   </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuHerramientas"/>
+   <addaction name="menuInformes"/>
+   <addaction name="menuAcercaDe"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -1186,15 +1409,20 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
     <string>Exportar Datos</string>
    </property>
   </action>
+  <action name="actionListado_clientes">
+   <property name="text">
+    <string>Listado clientes</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chkGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>

@@ -21,30 +21,6 @@ class Conexion():
     '''
     Módulos gestión base datos clientes
     '''
-
-    # def altaCli2(newcli):
-    #     try:
-    #         query = QtSql.QSqlQuery()
-    #         query.prepare('insert into clientes (dni, apellidos, nombre, direccion, provincia, sexo) VALUES '
-    #                       '(:dni, :apellidos, :nombre, :direccion, :provincia, :sexo)')
-    #         query.bindValue(':dni', str(newcli[0]))
-    #         query.bindValue(':apellidos', str(newcli[1]))
-    #         query.bindValue(':nombre', str(newcli[2]))
-    #         query.bindValue(':direccion', str(newcli[3]))
-    #         query.bindValue(':provincia', str(newcli[4]))
-    #         query.bindValue(':sexo', str(newcli[5]))
-    #
-    #         if query.exec_():
-    #             pass
-    #         else:
-    #             msg = QtWidgets.QMessageBox()
-    #             msg.setWindowTitle('Aviso')
-    #             msg.setIcon(QtWidgets.QMessageBox.Warning)
-    #             msg.setText(query.lastError().text())
-    #             msg.exec()
-    #     except Exception as error:
-    #         print('Problemas alta cliente',error)
-
     def altaCli(newcli):
         try:
             query = QtSql.QSqlQuery()
@@ -135,6 +111,20 @@ class Conexion():
         except Exception as error:
             print('Problemas cargar datos cliente', error)
 
+    def oneArticulo(codigo):
+        try:
+            record = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo, nombre, precio where codigo = :codigo')
+            query.bindValue(':codigo', codigo)
+            if query.exec_():
+                while query.next():
+                    for i in range(3):
+                        record.append(query.value(i))
+            return record
+        except Exception as error:
+            print('Problemas cargar datos cliente', error)
+
 
     def cargaProv(self):
         try:
@@ -204,3 +194,98 @@ class Conexion():
 
         except Exception as error:
             print('Problemas modificar clientes. ', error)
+
+    '''
+    Módulos gestión base datos articulos
+    '''
+
+    def cargarTablaArt(self):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT codigo, nombre, precio FROM articulos')
+            if query.exec_():
+                while query.next():
+                    codigo = query.value(0)
+                    nombre = query.value(1)
+                    precio = query.value(2)
+                    var.ui.tabArt.setRowCount(index+1)
+                    var.ui.tabArt.setItem(index, 0,QtWidgets.QTableWidgetItem(codigo))
+                    var.ui.tabArt.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
+                    var.ui.tabArt.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
+                    index+=1
+
+        except Exception as error:
+            print('Problemas al mostrar tabla artículos',error)
+
+    def altaArticulo(nuevoArt):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into articulos (codigo, nombre, precio) VALUES (:codigo, :nombre, :precio)')
+            query.bindValue(':codigo', str(nuevoArt[0]))
+            query.bindValue(':nombre', str(nuevoArt[1]))
+            query.bindValue(':precio', str(nuevoArt[2]))
+
+            if query.exec_():
+                print('Inserción de artículo correcta')
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Articulo guardado con éxito')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+        except Exception as error:
+            print('Problemas guardado artículo',error)
+
+
+    def bajaArticulo(codigo):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('DELETE FROM articulos WHERE codigo = :codigo')
+            query.bindValue(':codigo', str(codigo))
+            if query.exec_():
+                print('Baja correcta')
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Articulo dado de baja')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+        except Exception as error:
+            print('Error baja articulo en conexion ', error)
+
+    def modifArt(modArt):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'UPDATE articulos SET nombre = :nombre,precio = :precio where codigo = :codigo')
+            query.bindValue(':codigo', str(modArt[0]))
+            query.bindValue(':nombre', str(modArt[1]))
+            query.bindValue(':precio', str(modArt[2]))
+            if query.exec_():
+                print('Modificacion correcta')
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Información')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Datos modificados de producto')
+                msg.exec()
+            else:
+                print('Error. ', query.lastError().text())
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+        except Exception as error:
+            print('Problemas modificar producto. ', error)

@@ -1,9 +1,12 @@
 # This is a sample Python script.
 import locale
 import sys
+
+import articulos
 import conexion
 import eventos
 import clientes
+import informes
 import var
 from datetime import *
 from ventana import *
@@ -49,13 +52,18 @@ class Main(QtWidgets.QMainWindow):
 
 #Eventos de botón
         var.ui.btnSalir.clicked.connect(eventos.Eventos.Salir)
+        var.ui.btnSalirArt.clicked.connect(eventos.Eventos.Salir)
         var.ui.rbtGroupSex.buttonClicked.connect(clientes.Clientes.SelSexo)
         var.ui.chkGroupPago.buttonClicked.connect(clientes.Clientes.selPago)
         var.ui.btnFchAlta.clicked.connect(eventos.Eventos.abrirCal)
         var.ui.btnGrabaCli.clicked.connect(clientes.Clientes.guardaCli)
+        var.ui.btnAltaArt.clicked.connect(articulos.Articulos.guardaArt)
         var.ui.btnLimpiar.clicked.connect(clientes.Clientes.limpiaFormCli)
+        var.ui.btnLimpiarArt.clicked.connect(articulos.Articulos.limpiaFormArt)
         var.ui.btnEliminar.clicked.connect(clientes.Clientes.bajaCli)
+        var.ui.btnEliminarArt.clicked.connect(articulos.Articulos.bajaArt)
         var.ui.btnModificar.clicked.connect(clientes.Clientes.modifCli)
+        var.ui.btnModArt.clicked.connect(articulos.Articulos.modifArt)
 
 #Eventos de la barra de menús y herramientas
         var.ui.actionSalir.triggered.connect(eventos.Eventos.Salir)
@@ -70,6 +78,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionbarCrearBU.triggered.connect(eventos.Eventos.crearBackup)
         var.ui.actionbarRecuperarBU.triggered.connect(eventos.Eventos.restaurarBD)
         var.ui.actionbarImprimir.triggered.connect(eventos.Eventos.Imprimir)
+        var.ui.actionListado_clientes.triggered.connect(informes.Informes.listadoClientes)
 #Eventos de texto
         var.ui.txtDNI.editingFinished.connect(clientes.Clientes.validarDNI)
         var.ui.txtNome.editingFinished.connect(clientes.Clientes.letracapital)
@@ -83,8 +92,13 @@ class Main(QtWidgets.QMainWindow):
         eventos.Eventos.resizeTabClientes(self)
         var.ui.tabClientes.clicked.connect(clientes.Clientes.cargaCli)
         var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        eventos.Eventos.resizeTabArticulos(self)
+        var.ui.tabArt.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        var.ui.tabArt.clicked.connect(articulos.Articulos.cargaArticulo)
+
 #Eventos Base de Datos
         conexion.Conexion.db_connect(var.filedb)
+        conexion.Conexion.cargarTablaArt(self)
         conexion.Conexion.cargarTabCli(self)
         conexion.Conexion.cargaProv(self)
         conexion.Conexion.cargaMuni(self)

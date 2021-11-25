@@ -8,6 +8,7 @@ global dlgcalendar
 global dlgerror
 global dlgabrir
 global copia
+global cv
 
 '''
 otras variables
