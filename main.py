@@ -7,6 +7,7 @@ import conexion
 import eventos
 import clientes
 import informes
+import invoice
 import var
 from datetime import *
 from ventana import *
@@ -57,13 +58,16 @@ class Main(QtWidgets.QMainWindow):
         var.ui.chkGroupPago.buttonClicked.connect(clientes.Clientes.selPago)
         var.ui.btnFchAlta.clicked.connect(eventos.Eventos.abrirCal)
         var.ui.btnGrabaCli.clicked.connect(clientes.Clientes.guardaCli)
-        var.ui.btnAltaArt.clicked.connect(articulos.Articulos.guardaArt)
+        var.ui.btnAltaArt.clicked.connect(articulos.Articulos.altaArt)
         var.ui.btnLimpiar.clicked.connect(clientes.Clientes.limpiaFormCli)
         var.ui.btnLimpiarArt.clicked.connect(articulos.Articulos.limpiaFormArt)
         var.ui.btnEliminar.clicked.connect(clientes.Clientes.bajaCli)
         var.ui.btnEliminarArt.clicked.connect(articulos.Articulos.bajaArt)
         var.ui.btnModificar.clicked.connect(clientes.Clientes.modifCli)
         var.ui.btnModArt.clicked.connect(articulos.Articulos.modifArt)
+        var.ui.btnBuscaCliFac.clicked.connect(invoice.Facturas.buscaCli)
+        var.ui.btnFechaFac.clicked.connect(eventos.Eventos.abrirCal)
+        var.ui.btnFacturar.clicked.connect(invoice.Facturas.facturar)
 
 #Eventos de la barra de menús y herramientas
         var.ui.actionSalir.triggered.connect(eventos.Eventos.Salir)
@@ -95,6 +99,8 @@ class Main(QtWidgets.QMainWindow):
         eventos.Eventos.resizeTabArticulos(self)
         var.ui.tabArt.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabArt.clicked.connect(articulos.Articulos.cargaArticulo)
+        eventos.Eventos.resizeTabFacturas(self)
+        var.ui.tabFacturas.clicked.connect(invoice.Facturas.cargaFac)
 
 #Eventos Base de Datos
         conexion.Conexion.db_connect(var.filedb)
@@ -102,6 +108,7 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.cargarTabCli(self)
         conexion.Conexion.cargaProv(self)
         conexion.Conexion.cargaMuni(self)
+        conexion.Conexion.cargaTabfacturas(self)
 #Barra de Estado
         var.ui.statusbar.addPermanentWidget(var.ui.lblStatus, 1)
         today = date.today()

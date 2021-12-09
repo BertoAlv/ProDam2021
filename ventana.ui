@@ -75,11 +75,11 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QTabWidget" name="tabWidget">
+   <widget class="QTabWidget" name="tabPrincipal">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>40</y>
+      <x>100</x>
+      <y>50</y>
       <width>881</width>
       <height>741</height>
      </rect>
@@ -91,7 +91,7 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
      </font>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -968,18 +968,214 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
      <attribute name="title">
       <string>Facturación</string>
      </attribute>
-     <widget class="QLabel" name="label">
+     <widget class="QFrame" name="frame">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>140</y>
-        <width>231</width>
-        <height>21</height>
+        <x>20</x>
+        <y>30</y>
+        <width>831</width>
+        <height>181</height>
        </rect>
       </property>
-      <property name="text">
-       <string>EN CONSTRUCCION FACTURACION</string>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(221, 221, 221);</string>
       </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>25</y>
+         <width>221</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_12">
+        <item>
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>DNI:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtDNIfac"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnBuscaCliFac">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>img/lupa_busqueda.png</normaloff>img/lupa_busqueda.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>36</width>
+            <height>36</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>490</x>
+         <y>30</y>
+         <width>301</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_13">
+        <item>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Fecha factura:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtFechaFac"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnFechaFac">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>img/png-clipart-graphics-calendar-illustration-computer-icons-calendar-icon-calendar-logo.png</normaloff>img/png-clipart-graphics-calendar-illustration-computer-icons-calendar-icon-calendar-logo.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>36</width>
+            <height>36</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>110</y>
+         <width>401</width>
+         <height>29</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_14">
+        <item>
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Cliente:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtClienteFac"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnFacturar">
+          <property name="text">
+           <string>Facturar</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>40</y>
+         <width>131</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_15">
+        <item>
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Número Factura:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lblNumfac">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>30</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 252, 208);</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="Line" name="line_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>220</y>
+        <width>841</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tabFacturas">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>260</y>
+        <width>341</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <column>
+       <property name="text">
+        <string>Codigo Fact.</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Fecha</string>
+       </property>
+      </column>
      </widget>
     </widget>
     <widget class="QWidget" name="tabArticulos">

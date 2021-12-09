@@ -1,4 +1,5 @@
 from PyQt5 import QtSql, QtWidgets
+from PyQt5.uic.properties import QtCore
 
 import var
 
@@ -210,9 +211,11 @@ class Conexion():
                     nombre = query.value(1)
                     precio = query.value(2)
                     var.ui.tabArt.setRowCount(index+1)
-                    var.ui.tabArt.setItem(index, 0,QtWidgets.QTableWidgetItem(codigo))
+                    var.ui.tabArt.setItem(index, 0,QtWidgets.QTableWidgetItem(str(codigo)))
                     var.ui.tabArt.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
-                    var.ui.tabArt.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
+                    var.ui.tabArt.setItem(index, 2, QtWidgets.QTableWidgetItem(str(precio)))
+                    var.ui.tabProd.item(index, 2).setTextAlignment(QtCore.Qt.AlignRight)
+                    var.ui.tabProd.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                     index+=1
 
         except Exception as error:
@@ -221,10 +224,9 @@ class Conexion():
     def altaArticulo(nuevoArt):
         try:
             query = QtSql.QSqlQuery()
-            query.prepare('insert into articulos (codigo, nombre, precio) VALUES (:codigo, :nombre, :precio)')
-            query.bindValue(':codigo', str(nuevoArt[0]))
-            query.bindValue(':nombre', str(nuevoArt[1]))
-            query.bindValue(':precio', str(nuevoArt[2]))
+            query.prepare('insert into articulos (nombre, precio) VALUES (:nombre, :precio)')
+            query.bindValue(':nombre', str(nuevoArt[0]))
+            query.bindValue(':precio', str(nuevoArt[1]))
 
             if query.exec_():
                 print('Inserción de artículo correcta')
@@ -289,3 +291,57 @@ class Conexion():
 
         except Exception as error:
             print('Problemas modificar producto. ', error)
+
+    def buscaClifac(dni):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select dni,apellidos,nombre from clientes where dni =:dni')
+            query.bindValue(':dni', str(dni))
+            if query.exec_():
+                while query.next():
+                    registro.append(query.value(1))
+                    registro.append(query.value(2))
+            return registro
+        except Exception as error:
+            print('Error en conexión buscar cliente. ', error)
+
+    def altaFac(registro):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into facturas (dni,fechafac) VALUES (:dni,:fecha)')
+            query.bindValue(':dni', str(registro[0]))
+            query.bindValue(':fecha', str(registro[1]))
+            if query.exec_():
+                print('Inserción correcta. ')
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Información')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Factura dada de alta.')
+                msg.exec()
+            else:
+                print('Error. ', query.lastError().text())
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+        except Exception as error:
+            print('Error en conexión alta factura. ', error)
+
+    def cargaTabfacturas(self):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT codfac, fechafac FROM facturas order by fechafac desc')
+            if query.exec_():
+                while query.next():
+                    codfac = query.value(0)
+                    fechafac = query.value(1)
+                    var.ui.tabFacturas.setRowCount(index + 1)
+                    var.ui.tabFacturas.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codfac)))
+                    var.ui.tabFacturas.setItem(index, 1, QtWidgets.QTableWidgetItem(fechafac))
+                    index += 1
+        except Exception as error:
+            print('Error en cargar Tab Facturas', error)

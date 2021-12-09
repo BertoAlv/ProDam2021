@@ -89,7 +89,10 @@ class Clientes():
     def cargarFecha(qDate):
         try:
             data= ('{0}/{1}/{2}'.format(qDate.day(),qDate.month(),qDate.year()))
-            var.ui.txtFchAlta.setText(str(data))
+            if var.ui.tabPrincipal.currentIndex()==0:
+                var.ui.txtFchAlta.setText(str(data))
+            elif var.ui.tabPrincipal.currentIndex()==1:
+                var.ui.txtFechaFac.setText(str(data))
             var.dlgcalendar.hide()
         except Exception as error:
             print('Error cargar fecha en txtFecha ',error)

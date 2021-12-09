@@ -49,6 +49,14 @@ class Eventos():
         except Exception as error:
             print('Error en resize de la tabla', error)
 
+    def resizeTabFacturas(self):
+        try:
+            header = var.ui.tabFacturas.horizontalHeader()
+            for i in range(2):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+        except Exception as error:
+            print('Error en resize de la tabla', error)
+
     def Abrir(self):
         try:
             var.dlgabrir.show()
