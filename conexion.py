@@ -1,3 +1,5 @@
+import locale
+
 from PyQt5 import QtSql, QtWidgets
 from PyQt5.uic.properties import QtCore
 
@@ -214,8 +216,6 @@ class Conexion():
                     var.ui.tabArt.setItem(index, 0,QtWidgets.QTableWidgetItem(str(codigo)))
                     var.ui.tabArt.setItem(index, 1, QtWidgets.QTableWidgetItem(nombre))
                     var.ui.tabArt.setItem(index, 2, QtWidgets.QTableWidgetItem(str(precio)))
-                    var.ui.tabProd.item(index, 2).setTextAlignment(QtCore.Qt.AlignRight)
-                    var.ui.tabProd.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                     index+=1
 
         except Exception as error:
@@ -266,31 +266,60 @@ class Conexion():
         except Exception as error:
             print('Error baja articulo en conexion ', error)
 
+    # def modifArt(modArt):
+    #     try:
+    #         query = QtSql.QSqlQuery()
+    #         query.prepare(
+    #             'UPDATE articulos SET nombre = :nombre,precio = :precio where codigo = :codigo')
+    #         query.bindValue(':codigo', str(modArt[0]))
+    #         query.bindValue(':nombre', str(modArt[1]))
+    #         query.bindValue(':precio', str(modArt[2]))
+    #         if query.exec_():
+    #             print('Modificacion correcta')
+    #             msg = QtWidgets.QMessageBox()
+    #             msg.setWindowTitle('Información')
+    #             msg.setIcon(QtWidgets.QMessageBox.Information)
+    #             msg.setText('Datos modificados de producto')
+    #             msg.exec()
+    #         else:
+    #             print('Error. ', query.lastError().text())
+    #             msg = QtWidgets.QMessageBox()
+    #             msg.setWindowTitle('Aviso')
+    #             msg.setIcon(QtWidgets.QMessageBox.Warning)
+    #             msg.setText(query.lastError().text())
+    #             msg.exec()
+    #
+    #     except Exception as error:
+    #         print('Problemas modificar producto. ', error)
+
     def modifArt(modArt):
         try:
             query = QtSql.QSqlQuery()
-            query.prepare(
-                'UPDATE articulos SET nombre = :nombre,precio = :precio where codigo = :codigo')
-            query.bindValue(':codigo', str(modArt[0]))
+            query.prepare('update articulos set nombre =:nombre, precio = :precio where codigo = :cod')
+            query.bindValue(':cod', int(modArt[0]))
             query.bindValue(':nombre', str(modArt[1]))
+            modArt[2] = [2].replace('€', '')
+            modArt[2] = modArt[2].replace(',', '.')
+            modArt[2] = float(modArt[2])
+            modArt[2] = round(modArt[2], 2)
+            modArt[2] = str(modArt[2])
+            modArt[2] = locale.currency(float(modArt[2]))
             query.bindValue(':precio', str(modArt[2]))
+
             if query.exec_():
-                print('Modificacion correcta')
                 msg = QtWidgets.QMessageBox()
-                msg.setWindowTitle('Información')
+                msg.setWindowTitle('Aviso')
                 msg.setIcon(QtWidgets.QMessageBox.Information)
-                msg.setText('Datos modificados de producto')
+                msg.setText('Datos modificados de Producto')
                 msg.exec()
             else:
-                print('Error. ', query.lastError().text())
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
                 msg.setIcon(QtWidgets.QMessageBox.Warning)
                 msg.setText(query.lastError().text())
                 msg.exec()
-
         except Exception as error:
-            print('Problemas modificar producto. ', error)
+            print('Error modificar producto en conexion: ', error)
 
     def buscaClifac(dni):
         try:
