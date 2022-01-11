@@ -128,14 +128,8 @@ class Eventos():
             workbook = xlrd.open_workbook(fichero)
             hoja = workbook.sheet_by_index(0)
             while contador < hoja.nrows:
-                for i in range(6):
-                    if i == 1:
-                        newcli.append((str)(date.today()))
-                    if i == 5:
-                        newcli.append('')
+                for i in range(9):
                     newcli.append(hoja.cell_value(contador + 1, i))
-                newcli.append('')
-                newcli.append(0)
                 conexion.Conexion.altaCli(newcli)
                 conexion.Conexion.cargarTabCli(newcli)
                 newcli.clear()
