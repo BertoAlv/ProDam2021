@@ -26,7 +26,7 @@ class Articulos():
     def cargaArticulo(self):
         try:
             fila = var.ui.tabArt.selectedItems()
-            datos = [var.ui.txtCodArt,var.ui.txtNomeArt, var.ui.txtPrecio]
+            datos = [var.ui.lblCodArt,var.ui.txtNomeArt, var.ui.txtPrecio]
             if fila:
                 row = [dato.text() for dato in fila]
             print(row)
@@ -39,7 +39,7 @@ class Articulos():
 
     def limpiaFormArt(self):
         try:
-            cajas = [var.ui.txtCodArt, var.ui.txtNomeArt, var.ui.txtPrecio]
+            cajas = [var.ui.lblCodArt, var.ui.txtNomeArt, var.ui.txtPrecio]
             for i in cajas:
                 i.setText('')
         except Exception as error:
@@ -48,7 +48,7 @@ class Articulos():
     def modifArt(self):
         try:
             modArt = []
-            articulo = [var.ui.txtCodArt, var.ui.txtNomeArt, var.ui.txtPrecio]
+            articulo = [var.ui.lblCodArt, var.ui.txtNomeArt, var.ui.txtPrecio]
             for i in articulo:
                 modArt.append(i.text())
             conexion.Conexion.modifArt(modArt)

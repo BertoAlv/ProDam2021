@@ -1,6 +1,6 @@
 import locale
 
-from PyQt5 import QtSql, QtWidgets
+from PyQt5 import QtSql, QtWidgets, QtGui
 from PyQt5.uic.properties import QtCore
 
 import var
@@ -359,6 +359,27 @@ class Conexion():
         except Exception as error:
             print('Error en conexión alta factura. ', error)
 
+    def bajaFac(codigo):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('DELETE FROM facturas WHERE codfac = :codigo')
+            query.bindValue(':codigo', str(codigo))
+            if query.exec_():
+                print('Baja correcta')
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Factura eliminada')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+        except Exception as error:
+            print('Error al eliminar factura ',error)
+
     def cargaTabfacturas(self):
         try:
             index = 0
@@ -368,9 +389,21 @@ class Conexion():
                 while query.next():
                     codfac = query.value(0)
                     fechafac = query.value(1)
+                    var.btnfacdel = QtWidgets.QPushButton()
+                    iconpapelera = QtGui.QPixmap("img/icon-papelera.png")
+                    var.btnfacdel.setFixedSize(26,26)
+                    var.btnfacdel.setIcon(QtGui.QIcon(iconpapelera))
                     var.ui.tabFacturas.setRowCount(index + 1)
                     var.ui.tabFacturas.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codfac)))
                     var.ui.tabFacturas.setItem(index, 1, QtWidgets.QTableWidgetItem(fechafac))
+                    cell_widget = QtWidgets.QWidget()
+                    lay_out = QtWidgets.QHBoxLayout(cell_widget)
+                    lay_out.setContentsMargins(0,0,0,0)
+                    lay_out.addWidget(var.btnfacdel)
+                    var.btnfacdel.clicked.connect(Conexion.bajaFac)
+                    var.ui.tabFacturas.setCellWidget(index, 2,cell_widget)
+                    var.ui.tabFacturas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                    var.ui.tabFacturas.item(index, 1).setTextAlignment(QtCore.Qt.AlignCenter)
                     index += 1
         except Exception as error:
             print('Error en cargar Tab Facturas', error)

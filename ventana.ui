@@ -1210,7 +1210,7 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>260</y>
+        <y>250</y>
         <width>221</width>
         <height>421</height>
        </rect>
@@ -1238,6 +1238,11 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
       <column>
        <property name="text">
         <string>Fecha</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string/>
        </property>
       </column>
      </widget>
