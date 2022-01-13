@@ -78,7 +78,7 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
    <widget class="QTabWidget" name="tabPrincipal">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>90</x>
       <y>50</y>
       <width>881</width>
       <height>741</height>
@@ -1012,7 +1012,7 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>img/icon_ojo.png</normaloff>img/icon_ojo.png</iconset>
+        <normaloff>img/icon-ojo.png</normaloff>img/icon-ojo.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -1210,9 +1210,9 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>250</y>
-        <width>221</width>
-        <height>421</height>
+        <y>270</y>
+        <width>231</width>
+        <height>381</height>
        </rect>
       </property>
       <property name="minimumSize">
@@ -1227,9 +1227,15 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
         <pointsize>10</pointsize>
        </font>
       </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
       <property name="selectionBehavior">
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
+      <attribute name="horizontalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
       <column>
        <property name="text">
         <string>Codigo Fact.</string>
@@ -1245,6 +1251,133 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
         <string/>
        </property>
       </column>
+     </widget>
+     <widget class="QLabel" name="lblVentas">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>240</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 252, 208);</string>
+      </property>
+      <property name="text">
+       <string>VENTAS</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tabVentas">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>270</y>
+        <width>551</width>
+        <height>381</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+       </font>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <column>
+       <property name="text">
+        <string>codventa</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>producto</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>precio</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>cantidad</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>total_venta</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QLabel" name="lblNumero">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>240</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 252, 208);</string>
+      </property>
+      <property name="text">
+       <string>Nº</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lblFecha">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>240</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Calibri</family>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 252, 208);</string>
+      </property>
+      <property name="text">
+       <string>Fecha</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tabArticulos">
@@ -1477,6 +1610,35 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
        </item>
       </layout>
      </widget>
+     <widget class="QPushButton" name="btnPDFart">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>190</y>
+        <width>41</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>img/icon-ojo.png</normaloff>img/icon-ojo.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QLabel" name="lblStatus">
@@ -1686,11 +1848,11 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chkGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>

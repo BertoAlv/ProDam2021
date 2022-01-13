@@ -52,8 +52,16 @@ class Eventos():
     def resizeTabFacturas(self):
         try:
             header = var.ui.tabFacturas.horizontalHeader()
-            # for i in range(2):
-            #     header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+            for i in range(3):
+                 header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+        except Exception as error:
+            print('Error en resize de la tabla', error)
+
+    def resizeTabVentas(self):
+        try:
+            header = var.ui.tabVentas.horizontalHeader()
+            for i in range(5):
+                 header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
         except Exception as error:
             print('Error en resize de la tabla', error)
 

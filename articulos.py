@@ -58,7 +58,7 @@ class Articulos():
 
     def bajaArt(self):
         try:
-            codigo = var.ui.txtCodArt.text()
+            codigo = var.ui.lblCodArt.text()
             conexion.Conexion.bajaArticulo(codigo)
             conexion.Conexion.cargarTablaArt(self)
         except Exception as error:

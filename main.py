@@ -69,6 +69,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnFechaFac.clicked.connect(eventos.Eventos.abrirCal)
         var.ui.btnFacturar.clicked.connect(invoice.Facturas.facturar)
         var.ui.btnPDFcli.clicked.connect(informes.Informes.listadoClientes)
+        var.ui.btnPDFart.clicked.connect(informes.Informes.listadoArticulos)
 
 #Eventos de la barra de menús y herramientas
         var.ui.actionSalir.triggered.connect(eventos.Eventos.Salir)
@@ -102,6 +103,10 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tabArt.clicked.connect(articulos.Articulos.cargaArticulo)
         eventos.Eventos.resizeTabFacturas(self)
         var.ui.tabFacturas.clicked.connect(invoice.Facturas.cargaFac)
+        eventos.Eventos.resizeTabVentas(self)
+        var.ui.tabVentas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        invoice.Facturas.cargaLineaVenta(self)
+
 
 #Eventos Base de Datos
         conexion.Conexion.db_connect(var.filedb)
