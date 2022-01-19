@@ -1211,7 +1211,7 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
        <rect>
         <x>20</x>
         <y>270</y>
-        <width>231</width>
+        <width>251</width>
         <height>381</height>
        </rect>
       </property>
@@ -1357,7 +1357,7 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
        <rect>
         <x>110</x>
         <y>240</y>
-        <width>101</width>
+        <width>91</width>
         <height>16</height>
        </rect>
       </property>

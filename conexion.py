@@ -1,10 +1,10 @@
 import locale
-
+import var
 from PyQt5 import QtSql, QtWidgets, QtGui
 from PyQt5.uic.properties import QtCore
-
+from ventana import *
 import invoice
-import var
+
 
 
 class Conexion():
@@ -267,32 +267,6 @@ class Conexion():
         except Exception as error:
             print('Error baja articulo en conexion ', error)
 
-    # def modifArt(modArt):
-    #     try:
-    #         query = QtSql.QSqlQuery()
-    #         query.prepare(
-    #             'UPDATE articulos SET nombre = :nombre,precio = :precio where codigo = :codigo')
-    #         query.bindValue(':codigo', str(modArt[0]))
-    #         query.bindValue(':nombre', str(modArt[1]))
-    #         query.bindValue(':precio', str(modArt[2]))
-    #         if query.exec_():
-    #             print('Modificacion correcta')
-    #             msg = QtWidgets.QMessageBox()
-    #             msg.setWindowTitle('Información')
-    #             msg.setIcon(QtWidgets.QMessageBox.Information)
-    #             msg.setText('Datos modificados de producto')
-    #             msg.exec()
-    #         else:
-    #             print('Error. ', query.lastError().text())
-    #             msg = QtWidgets.QMessageBox()
-    #             msg.setWindowTitle('Aviso')
-    #             msg.setIcon(QtWidgets.QMessageBox.Warning)
-    #             msg.setText(query.lastError().text())
-    #             msg.exec()
-    #
-    #     except Exception as error:
-    #         print('Problemas modificar producto. ', error)
-
     def modifArt(modArt):
         try:
             query = QtSql.QSqlQuery()
@@ -421,3 +395,29 @@ class Conexion():
                     index += 1
         except Exception as error:
             print('Error en cargar Tab Facturas', error)
+
+    def cargarCmbProducto(self):
+        try:
+            var.cmbProducto.clear()
+            query = QtSql.QSqlQuery()
+            var.cmbProducto.addItem('')
+            query.prepare('select nombre from articulos order by nombre')
+            if query.exec_():
+                while query.next():
+                    var.cmbProducto.addItem(str(query.value(0)))
+        except Exception as error:
+            print('Error al cargar cmbProducto ',error)
+
+    def obtenerCodPrecio(articulo):
+        try:
+            dato = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo, precio from articulos where nombre = :nombre')
+            query.bindValue(':nombre', str(articulo))
+            if query.exec_():
+                while query.next():
+                    dato.append(int(query.value(0)))
+                    dato.append(str(query.value(1)))
+            return dato
+        except Exception as error:
+            print('Error al cargar cod precio ', error)

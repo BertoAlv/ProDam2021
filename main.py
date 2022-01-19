@@ -1,14 +1,10 @@
 # This is a sample Python script.
-import locale
-import sys
 
 import articulos
 import conexion
-import eventos
 import clientes
-import informes
 import invoice
-import var
+import sys,var, eventos, locale, informes
 from datetime import *
 from ventana import *
 from windowaviso import *
@@ -85,14 +81,15 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionbarRecuperarBU.triggered.connect(eventos.Eventos.restaurarBD)
         var.ui.actionbarImprimir.triggered.connect(eventos.Eventos.Imprimir)
         var.ui.actionListado_clientes.triggered.connect(informes.Informes.listadoClientes)
+
 #Eventos de texto
         var.ui.txtDNI.editingFinished.connect(clientes.Clientes.validarDNI)
         var.ui.txtNome.editingFinished.connect(clientes.Clientes.letracapital)
         var.ui.txtApel.editingFinished.connect(clientes.Clientes.letracapital)
         var.ui.txtDir.editingFinished.connect(clientes.Clientes.letracapital)
-#Eventos de comboBox
-        var.ui.cmbProv.activated[str].connect(clientes.Clientes.selProv)
-        var.ui.cmbProv.currentIndexChanged.connect(conexion.Conexion.cargaMuni)
+        var.txtCantidad = QtWidgets.QLineEdit()
+        var.txtCantidad.editingFinished.connect(invoice.Facturas.totalLineaVenta)
+
 
 #Eventos de QTabWidget
         eventos.Eventos.resizeTabClientes(self)
@@ -115,6 +112,16 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.cargaProv(self)
         conexion.Conexion.cargaMuni(self)
         conexion.Conexion.cargaTabfacturas(self)
+        conexion.Conexion.cargarCmbProducto(self)
+
+# Eventos de comboBox
+        var.ui.cmbProv.activated[str].connect(clientes.Clientes.selProv)
+        var.ui.cmbProv.currentIndexChanged.connect(conexion.Conexion.cargaMuni)
+
+        var.cmbProducto.currentIndexChanged.connect(invoice.Facturas.procesoVenta)
+
+
+
 #Barra de Estado
         var.ui.statusbar.addPermanentWidget(var.ui.lblStatus, 1)
         today = date.today()

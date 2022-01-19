@@ -1,6 +1,6 @@
+import var
 import conexion
 import eventos
-import var
 from ventana import *
 import locale
 locale.setlocale( locale.LC_ALL, '' )

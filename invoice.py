@@ -1,7 +1,7 @@
 import conexion
 import var
 import ventana
-from PyQt5 import QtSql, QtWidgets
+from PyQt5 import QtSql, QtWidgets, QtCore
 
 class Facturas():
 
@@ -52,7 +52,7 @@ class Facturas():
             if registro:
                 nombre = registro[0] + ',' + registro[1]
                 var.ui.txtClienteFac.setText(nombre)
-            Facturas.cargaVenta1(self)
+            Facturas.cargaLineaVenta(self)
         except Exception as error:
             print('Error al cargar factura. ', error)
 
@@ -60,11 +60,35 @@ class Facturas():
         try:
             index = 0
             var.cmbProducto = QtWidgets.QComboBox()
-            var.txtCantidad = QtWidgets.QLineEdit()
+            conexion.Conexion.cargarCmbProducto(self)
+
             var.ui.tabVentas.setRowCount(index+1)
             var.ui.tabVentas.setCellWidget(index,1,var.cmbProducto)
             var.ui.tabVentas.setCellWidget(index,3,var.txtCantidad)
-
         except Exception as error:
             print('Error al cargar linea de venta ',error)
 
+    def procesoVenta(self):
+        try:
+            row = var.ui.tabVentas.currentRow()
+            articulo = var.cmbProducto.currentText()
+            dato = conexion.Conexion.obtenerCodPrecio(articulo)
+            print(dato)
+            var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(dato[1])))
+            var.ui.tabVentas.item(row,2).setTextAlignment(QtCore.Qt.AlignCenter)
+            precio = dato[1].replace('€','')
+            var.precio = precio.replace(',','.')
+
+        except Exception as error:
+            print('Error en proceso venta: ', error)
+
+    def totalLineaVenta(self = None):
+        try:
+            row = var.ui.tabVentas.currentRow()
+            cantidad = round(float(var.txtCantidad.text().replace(',', '.')), 2)
+            total_venta = round((float(var.precio) * float(cantidad)),2)
+            var.ui.tabVentas.setItem(row, 4, QtWidgets.QTableWidgetItem(str(total_venta) + ' €'))
+            var.ui.tabVentas.item(row, 4).setTextAlignment(QtCore.Qt.AlignCenter)
+
+        except Exception as error:
+            print('Error en el total linea venta', error)
