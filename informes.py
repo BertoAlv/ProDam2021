@@ -4,7 +4,7 @@ from PyQt5 import QtSql
 from reportlab.pdfgen import canvas
 from datetime import datetime
 
-import informes
+import informes, conexion
 
 
 class Informes():
@@ -117,7 +117,7 @@ class Informes():
 
     def cabecera(self):
         try:
-            logo = '.\\img\\logo-empresa.png'
+            logo = '.\\img\\logoEmpresa.jpg'
             var.cv.setFont('Helvetica-Bold',14)
             var.cv.line(30,805,550,805)
             var.cv.line(30,710,550,710)
@@ -127,7 +127,7 @@ class Informes():
             var.cv.drawString(40,755,'Dirección: Avenida Galicia, 101')
             var.cv.drawString(40,740,'Vigo - 36216 - Spain')
             var.cv.drawString(40,725,'email: micorreo@gmail.com')
-            var.cv.drawImage(logo,400,715)
+            var.cv.drawImage(logo,405,718)
         except Exception as error:
             print('Error en la cabecera ',error)
 
@@ -143,3 +143,52 @@ class Informes():
 
         except Exception as error:
             print('Error creación de pie de informe clientes. ', error)
+
+    def factura(self):
+        try:
+            var.cv = canvas.Canvas('informes/factura.pdf')
+            var.cv.setTitle('Factura')
+            var.cv.setAuthor('Departamento de Administración')
+            rootPath = '.\\informes'
+            var.cv.setFont('Helvetica-Bold',size=12)
+            textotitulo = 'FACTURA'
+            Informes.cabecera(self)
+            Informes.pie(textotitulo)
+            codfac = var.ui.lblNumfac.text()
+            var.cv.drawString(260, 694, textotitulo+': '+(str(codfac)))
+            var.cv.line(30, 685, 550, 685)
+            items = ['Venta', 'Articulo', 'Precio', 'Cantidad', 'Total']
+            var.cv.drawString(65, 673, items[0])
+            var.cv.drawString(165, 673, items[1])
+            var.cv.drawString(270, 673, items[2])
+            var.cv.drawString(380, 673, items[3])
+            var.cv.drawString(490, 673, items[4])
+            suma = 0.0
+            query = QtSql.QSqlQuery()
+            query.prepare('select codven,precio,cantidad,codpro from ventas where codfac = :codfac')
+            query.bindValue(':codfac', int(codfac))
+            if query.exec_():
+                i = 50
+                j = 655
+                while query.next():
+                    codventa = query.value(0)
+                    precio = query.value(1)
+                    cantidad = query.value(2)
+                    nombre = conexion.Conexion.buscaArt(int(query.value(3)))
+                    total = round(precio * cantidad, 2)
+                    suma += total
+                    var.cv.setFont('Helvetica', size=9)
+                    var.cv.drawString(i + 20, j, str(query.value(0)))
+                    var.cv.drawString(i + 100, j, str(nombre))
+                    var.cv.drawString(i + 219, j, str(precio)+'€/kg')
+                    var.cv.drawString(i + 340, j, str(cantidad))
+                    var.cv.drawString(i + 442, j, str(total))
+                    j = j - 20
+            var.cv.save()
+            cont = 0
+            for file in os.listdir(rootPath):
+                if file.endswith('factura.pdf'):
+                    os.startfile('%s/%s' % (rootPath, file))
+                cont = cont + 1
+        except Exception as error:
+            print('Error creación informe facturas', error)

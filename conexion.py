@@ -370,6 +370,7 @@ class Conexion():
 
     def cargaTabfacturas(self):
         try:
+            var.ui.tabFacturas.clearContents()
             index = 0
             query = QtSql.QSqlQuery()
             query.prepare('SELECT codfac, fechafac FROM facturas order by fechafac desc')
@@ -421,3 +422,99 @@ class Conexion():
             return dato
         except Exception as error:
             print('Error al cargar cod precio ', error)
+
+    def cargarVenta(venta):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into ventas (codfac, codpro, precio, cantidad) values (:codfac, :codpro, :precio, :cantidad)')
+            query.bindValue(':codfac',int(venta[0]))
+            query.bindValue(':codpro',int(venta[1]))
+            query.bindValue(':precio',float(venta[2]))
+            query.bindValue(':cantidad',float(venta[3]))
+            if query.exec_():
+                var.ui.lblAvisoVenta.setStyleSheet('QLabel {color:black;}')
+                var.ui.lblAvisoVenta.setText('Venta realizada')
+            else:
+                var.ui.lblAvisoVenta.setText('Error en la venta')
+                var.ui.lblAvisoVenta.setStyleSheet('QLabel {color:red;}')
+        except Exception as error:
+            print('Error modulo cargar venta', error)
+
+    def buscaCodFac(self):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo from facturas order by codigo desc limit 1')
+            if query.exec_():
+                while query.next():
+                    dato = query.value(0)
+            return dato
+        except Exception as error:
+            print('Error busqueda codigo factura ',error)
+
+    def cargarLineasVenta(codfac):
+        try:
+            suma = 0.0
+            var.ui.tabVentas.clearContents()
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select codven,precio,cantidad,codpro from ventas where codfac = :codfac')
+            query.bindValue(':codfac', int(codfac))
+
+            if query.exec_():
+                while query.next():
+                    codventa = query.value(0)
+                    precio = query.value(1)
+                    cantidad = query.value(2)
+                    nombre = Conexion.buscaArt(int(query.value(3)))
+                    total = round(precio * cantidad, 2)
+                    suma += total
+                    var.ui.tabVentas.setRowCount(index + 1)
+                    var.ui.tabVentas.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codventa)))
+                    var.ui.tabVentas.setItem(index, 1, QtWidgets.QTableWidgetItem(str(nombre)))
+                    var.ui.tabVentas.setItem(index, 2, QtWidgets.QTableWidgetItem(str(precio)+' €'))
+                    var.ui.tabVentas.setItem(index, 3, QtWidgets.QTableWidgetItem(str(cantidad)))
+                    var.ui.tabVentas.setItem(index, 4, QtWidgets.QTableWidgetItem(str(total)+' €'))
+                    var.ui.tabVentas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                    var.ui.tabVentas.item(index, 2).setTextAlignment(QtCore.Qt.AlignCenter)
+                    var.ui.tabVentas.item(index, 3).setTextAlignment(QtCore.Qt.AlignCenter)
+                    var.ui.tabVentas.item(index, 4).setTextAlignment(QtCore.Qt.AlignCenter)
+                    index = index + 1
+                invoice.Facturas.cargaLineaVenta(index)
+            iva = suma * 0.21
+            total = suma + iva
+            var.ui.lblSubtotal.setText(str(suma)+' €')
+            var.ui.lblIVA.setText(str(round(iva,2))+' €')
+            var.ui.lblTotal.setText(str(round(total,2))+ ' €')
+
+        except Exception as error:
+            print('error cargar lineas de factura', error)
+
+    def buscaArt(codpro):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('select nombre from articulos where codigo = :codpro')
+            query.bindValue(':codpro', str(codpro))
+            if query.exec_():
+                while query.next():
+                    return (query.value(0))
+        except Exception as error:
+            print('Error en la búsqueda de articulo')
+
+    def borraVenta(self):
+        try:
+            row = var.ui.tabVentas.currentRow()
+            codventa = var.ui.tabVentas.item(row,0).text()
+            query = QtSql.QSqlQuery()
+            query.prepare('delete from ventas where codven = :codven')
+            query.bindValue(':codven',int(codventa))
+            if query.exec_():
+                msg1 = QtWidgets.QMessageBox()
+                msg1.setWindowTitle('Aviso')
+                msg1.setIcon(QtWidgets.QMessageBox.Information)
+                msg1.setText('Venta eliminada')
+                msg1.exec()
+                codfac = var.ui.lblNumfac.text()
+                Conexion.cargarLineasVenta(codfac)
+        except Exception as error:
+            print('Error baja venta', error)
+

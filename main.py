@@ -47,6 +47,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui = Ui_window()
         var.ui.setupUi(self)
 
+
 #Eventos de botón
         var.ui.btnSalir.clicked.connect(eventos.Eventos.Salir)
         var.ui.btnSalirArt.clicked.connect(eventos.Eventos.Salir)
@@ -57,6 +58,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnAltaArt.clicked.connect(articulos.Articulos.altaArt)
         var.ui.btnLimpiar.clicked.connect(clientes.Clientes.limpiaFormCli)
         var.ui.btnLimpiarArt.clicked.connect(articulos.Articulos.limpiaFormArt)
+        var.ui.btnLimpiarFac.clicked.connect(invoice.Facturas.limpiaFormFac)
         var.ui.btnEliminar.clicked.connect(clientes.Clientes.bajaCli)
         var.ui.btnEliminarArt.clicked.connect(articulos.Articulos.bajaArt)
         var.ui.btnModificar.clicked.connect(clientes.Clientes.modifCli)
@@ -64,8 +66,10 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnBuscaCliFac.clicked.connect(invoice.Facturas.buscaCli)
         var.ui.btnFechaFac.clicked.connect(eventos.Eventos.abrirCal)
         var.ui.btnFacturar.clicked.connect(invoice.Facturas.facturar)
-        var.ui.btnPDFcli.clicked.connect(informes.Informes.listadoClientes)
+        var.ui.btnReportCli.clicked.connect(informes.Informes.listadoClientes)
         var.ui.btnPDFart.clicked.connect(informes.Informes.listadoArticulos)
+        var.ui.btnImpFac.clicked.connect(informes.Informes.factura)
+        var.ui.btnBorrarVenta.clicked.connect(conexion.Conexion.borraVenta)
 
 #Eventos de la barra de menús y herramientas
         var.ui.actionSalir.triggered.connect(eventos.Eventos.Salir)
@@ -88,6 +92,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.txtApel.editingFinished.connect(clientes.Clientes.letracapital)
         var.ui.txtDir.editingFinished.connect(clientes.Clientes.letracapital)
         var.txtCantidad = QtWidgets.QLineEdit()
+        #var.txtCantidad.returnPressed.connect(invoice.Facturas.totalLineaVenta)
         var.txtCantidad.editingFinished.connect(invoice.Facturas.totalLineaVenta)
 
 
@@ -103,6 +108,7 @@ class Main(QtWidgets.QMainWindow):
         eventos.Eventos.resizeTabVentas(self)
         var.ui.tabVentas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         invoice.Facturas.cargaLineaVenta(self)
+        var.ui.tabClientes.clicked.connect(invoice.Facturas.cargaCliFac)
 
 
 #Eventos Base de Datos

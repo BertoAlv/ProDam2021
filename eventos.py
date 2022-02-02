@@ -162,7 +162,6 @@ class Eventos():
                              'SEXO': query.value(7),
                              'PAGO': query.value(8),
                              'ENVIO': query.value(9)}
-
                     info.append(datos)
 
                 df_clientes = pd.DataFrame(info,columns=['DNI', 'ALTA', 'APELLIDOS', 'NOMBRE', 'DIRECCION', 'PROVINCIA',
