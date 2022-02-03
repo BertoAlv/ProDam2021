@@ -20,3 +20,5 @@ global codpro
 otras variables
 '''
 filedb = 'bbdd.sqlite'
+
+from img import calendar,cargarbd,carpeta,expotarbd,imprimir,lupa,papelera,refrescar,salir,visualizar

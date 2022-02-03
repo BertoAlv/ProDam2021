@@ -513,8 +513,7 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
          </property>
          <property name="icon">
           <iconset>
-           <normalon>img/refrescar.png</normalon>
-          </iconset>
+           <normaloff>:/newPrefix/img/refrescar.png</normaloff>:/newPrefix/img/refrescar.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -576,9 +575,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
           <string/>
          </property>
          <property name="icon">
-          <iconset>
-           <normalon>img/calendar.png</normalon>
-          </iconset>
+          <iconset resource="img/calendar.qrc">
+           <normaloff>:/newPrefix/calendar.png</normaloff>:/newPrefix/calendar.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -982,8 +980,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
        <string/>
       </property>
       <property name="icon">
-       <iconset>
-        <normaloff>img/impresora.jpg</normaloff>img/impresora.jpg</iconset>
+       <iconset resource="img/imprimir.qrc">
+        <normaloff>:/newPrefix/impresora.jpg</normaloff>:/newPrefix/impresora.jpg</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -1011,8 +1009,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
        <string/>
       </property>
       <property name="icon">
-       <iconset>
-        <normaloff>img/icon-ojo.png</normaloff>img/icon-ojo.png</iconset>
+       <iconset resource="img/visualizar.qrc">
+        <normaloff>:/newPrefix/icon-ojo.png</normaloff>:/newPrefix/icon-ojo.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -1070,8 +1068,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>img/lupa_busqueda.png</normaloff>img/lupa_busqueda.png</iconset>
+           <iconset resource="img/lupa.qrc">
+            <normaloff>:/newPrefix/lupa_busqueda.png</normaloff>:/newPrefix/lupa_busqueda.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -1109,8 +1107,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>img/png-clipart-graphics-calendar-illustration-computer-icons-calendar-icon-calendar-logo.png</normaloff>img/png-clipart-graphics-calendar-illustration-computer-icons-calendar-icon-calendar-logo.png</iconset>
+           <iconset resource="img/calendar.qrc">
+            <normaloff>:/newPrefix/calendar.png</normaloff>:/newPrefix/calendar.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -1221,8 +1219,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>img/impresora.jpg</normaloff>img/impresora.jpg</iconset>
+        <iconset resource="img/imprimir.qrc">
+         <normaloff>:/newPrefix/impresora.jpg</normaloff>:/newPrefix/impresora.jpg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1244,8 +1242,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>img/icon-papelera.png</normaloff>img/icon-papelera.png</iconset>
+        <iconset resource="img/papelera.qrc">
+         <normaloff>:/newPrefix/icon-papelera.png</normaloff>:/newPrefix/icon-papelera.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1258,7 +1256,7 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
        <property name="geometry">
         <rect>
          <x>780</x>
-         <y>10</y>
+         <y>30</y>
          <width>32</width>
          <height>32</height>
         </rect>
@@ -1282,9 +1280,9 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normalon>img/refrescar.png</normalon>
-        </iconset>
+        <iconset resource="img/refrescar.qrc">
+         <normaloff>:/newPrefix/refrescar.png</normaloff>
+         <normalon>img/refrescar.png</normalon>:/newPrefix/refrescar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1338,6 +1336,9 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
        <enum>QAbstractItemView::SelectRows</enum>
       </property>
       <attribute name="horizontalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
        <bool>false</bool>
       </attribute>
       <column>
@@ -1450,7 +1451,7 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
        <string notr="true">background-color: rgb(255, 252, 208);</string>
       </property>
       <property name="text">
-       <string>Nº</string>
+       <string>    Nº</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -1932,9 +1933,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
        <string/>
       </property>
       <property name="icon">
-       <iconset>
-        <normalon>img/refrescar.png</normalon>
-       </iconset>
+       <iconset resource="img/refrescar.qrc">
+        <normaloff>:/newPrefix/refrescar.png</normaloff>:/newPrefix/refrescar.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -2006,8 +2006,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
        <string/>
       </property>
       <property name="icon">
-       <iconset>
-        <normaloff>img/icon-ojo.png</normaloff>img/icon-ojo.png</iconset>
+       <iconset resource="img/visualizar.qrc">
+        <normaloff>:/newPrefix/icon-ojo.png</normaloff>:/newPrefix/icon-ojo.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -2157,8 +2157,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
   </action>
   <action name="actionbarSalir">
    <property name="icon">
-    <iconset>
-     <normaloff>img/icon_salir.png</normaloff>img/icon_salir.png</iconset>
+    <iconset resource="img/salir.qrc">
+     <normaloff>:/newPrefix/icon_salir.png</normaloff>:/newPrefix/icon_salir.png</iconset>
    </property>
    <property name="text">
     <string>barSalir</string>
@@ -2166,8 +2166,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
   </action>
   <action name="actionbarCrearBU">
    <property name="icon">
-    <iconset>
-     <normaloff>img/icon_crearBU.png</normaloff>img/icon_crearBU.png</iconset>
+    <iconset resource="img/expotarbd.qrc">
+     <normaloff>:/newPrefix/icon_crearBU.png</normaloff>:/newPrefix/icon_crearBU.png</iconset>
    </property>
    <property name="text">
     <string>barCrearBU</string>
@@ -2175,8 +2175,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
   </action>
   <action name="actionbarRecuperarBU">
    <property name="icon">
-    <iconset>
-     <normaloff>img/icon_recuperarBU.png</normaloff>img/icon_recuperarBU.png</iconset>
+    <iconset resource="img/cargarbd.qrc">
+     <normaloff>:/newPrefix/icon_recuperarBU.png</normaloff>:/newPrefix/icon_recuperarBU.png</iconset>
    </property>
    <property name="text">
     <string>barRecuperarBU</string>
@@ -2184,8 +2184,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
   </action>
   <action name="actionbarOpenFile">
    <property name="icon">
-    <iconset>
-     <normaloff>img/icon_carpeta.png</normaloff>img/icon_carpeta.png</iconset>
+    <iconset resource="img/carpeta.qrc">
+     <normaloff>:/newPrefix/icon_carpeta.png</normaloff>:/newPrefix/icon_carpeta.png</iconset>
    </property>
    <property name="text">
     <string>barOpenFile</string>
@@ -2193,9 +2193,8 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
   </action>
   <action name="actionbarImprimir">
    <property name="icon">
-    <iconset>
-     <normaloff>img/impresora.jpg</normaloff>
-     <normalon>img/impresora.jpg</normalon>img/impresora.jpg</iconset>
+    <iconset resource="img/imprimir.qrc">
+     <normaloff>:/newPrefix/impresora.jpg</normaloff>:/newPrefix/impresora.jpg</iconset>
    </property>
    <property name="text">
     <string>barImpresora</string>
@@ -2222,14 +2221,25 @@ background:qlineargradient(spread:pad, x1:0.443, y1:0.0170455, x2:0.472, y2:1, s
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="img/refrescar.qrc"/>
+  <include location="img/papelera.qrc"/>
+  <include location="img/lupa.qrc"/>
+  <include location="img/expotarbd.qrc"/>
+  <include location="img/cargarbd.qrc"/>
+  <include location="img/salir.qrc"/>
+  <include location="img/visualizar.qrc"/>
+  <include location="img/imprimir.qrc"/>
+  <include location="img/carpeta.qrc"/>
+  <include location="img/calendar.qrc"/>
+ </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chkGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>

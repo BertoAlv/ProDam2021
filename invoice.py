@@ -116,6 +116,7 @@ class Facturas():
             venta.append(float(var.precio))
             venta.append(float(cantidad))
             conexion.Conexion.cargarVenta(venta)
+            conexion.Conexion.cargarLineasVenta(codfac)
         except Exception as error:
             print('Error en el total linea venta', error)
 

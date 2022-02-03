@@ -443,7 +443,7 @@ class Conexion():
     def buscaCodFac(self):
         try:
             query = QtSql.QSqlQuery()
-            query.prepare('select codigo from facturas order by codigo desc limit 1')
+            query.prepare('select codfac from facturas order by codfac desc limit 1')
             if query.exec_():
                 while query.next():
                     dato = query.value(0)
@@ -482,10 +482,10 @@ class Conexion():
                 invoice.Facturas.cargaLineaVenta(index)
             iva = suma * 0.21
             total = suma + iva
-            var.ui.lblSubtotal.setText(str(suma)+' €')
+            var.ui.lblSubtotal.setText(str(round(suma,2))+' €')
             var.ui.lblIVA.setText(str(round(iva,2))+' €')
             var.ui.lblTotal.setText(str(round(total,2))+ ' €')
-
+            var.ui.tabVentas.scrollToBottom()
         except Exception as error:
             print('error cargar lineas de factura', error)
 
